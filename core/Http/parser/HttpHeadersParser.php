@@ -146,20 +146,19 @@ class HttpHeadersParser
             return $this->requestHeaders();
         }
 
-        foreach($this->headers as $header => $value) {
-            $this->setHeader('status', $value);
-            $this->setHeader('date', $value);
-            $this->setHeader('contentType', $value);
-            $this->setHeader('cookies', $value);
-            $this->setHeader('expires', $value);
-            $this->setHeader('cacheControl', $value);
-            $this->setHeader('pragma', $value);
-            $this->setHeader('server', $value);
-            $this->setHeader('xssProtection', $value);
-            $this->setHeader('contentTypeOptions', $value);
-            $this->setHeader('requestId', $value);
-            $this->setHeader('connection', $value);
-        }
+        $this->setHeader('status', $this->headers['0']);
+        $this->setHeader('date', $this->headers['Date']);
+        $this->setHeader('contentType', $this->headers['Content-Type']);
+        $this->setHeader('cookies', $this->headers['Set-Cookie']);
+        $this->setHeader('expires', $this->headers['Expires']);
+        $this->setHeader('cacheControl', $this->headers['Cache-Control']);
+        $this->setHeader('pragma', $this->headers['Pragma']);
+        $this->setHeader('server', $this->headers['Server']);
+        $this->setHeader('xssProtection', $this->headers['X-Xss-Protection']);
+        $this->setHeader('contentTypeOptions', $this->headers['X-Content-Type-Options']);
+        $this->setHeader('requestId', $this->headers['X-Request-ID']);
+        $this->setHeader('connection', $this->headers['Connection']);
+        
     }
 
     /**
@@ -173,16 +172,17 @@ class HttpHeadersParser
             return $this->responseHeaders();
         }
 
-        foreach($this->headers as $header => $value) {
-            $this->setHeader('host', $value);
-            $this->setHeader('userAgent', $value);
-            $this->setHeader('accept', $value);
-            $this->setHeader('lang', $value);
-            $this->setHeader('encoding', $value);
-            $this->setHeader('dntStatus', $value);
-            $this->setHeader('connection', $value);
-            $this->setHeader('insecureRequest', $value);
-        }
+        $this->setHeader('host', $this->headers['Host']);
+        $this->setHeader('userAgent', $this->headers['User-Agent']);
+        $this->setHeader('accept', $this->headers['Accept']);
+        $this->setHeader('lang', $this->headers['Accept-Language']);
+        $this->setHeader('encoding', $this->headers['Accept-Encoding']);
+        $this->setHeader('dntStatus', $this->headers['DNT']);
+        $this->setHeader('connection', $this->headers['Connection']);
+        $this->setHeader('insecureRequest', $this->headers['Upgrade-Insecure-Requests']);
+        $this->setHeader('cacheControl', $this->headers['Cache-Control']);
+
+
     }
 
     protected function setHeader(string $header, string $value) :string 
