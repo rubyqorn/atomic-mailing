@@ -22,7 +22,7 @@ class Socket
             return $this->socket;
         }
 
-        throw new InvaludArguments('Invalid socket resource');
+        throw new InvalidArguments('Invalid socket resource');
         
     }
 

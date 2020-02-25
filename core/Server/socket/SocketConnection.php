@@ -33,7 +33,9 @@ class SocketConnection implements ConnectionSetter
             $this->settings['domain'], 
             $this->settings['type'], 
             $this->settings['protocol']
-        );
+        ); 
+
+        $this->open();
     }
 
     /**
@@ -43,7 +45,7 @@ class SocketConnection implements ConnectionSetter
     {
         $this->bind();
         $this->listen();
-        $this->accept();
+        $this->accept();           
     }
 
     /**

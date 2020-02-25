@@ -13,6 +13,7 @@ class SocketReader
      */ 
     public static function read($socket)
     {
-        return socket_read($socket, 2048);
+        $message = socket_read($socket, 2048);
+        return $message;
     }
 }

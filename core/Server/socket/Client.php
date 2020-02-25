@@ -49,7 +49,7 @@ class Client implements ConnectionSetter
      */ 
     protected function create()
     {
-
+        
         return $this->socket = socket_create(
             $this->settings['domain'],
             $this->settings['type'],
@@ -66,8 +66,8 @@ class Client implements ConnectionSetter
     {
         return $this->sockConnect = socket_connect(
                 $this->socket,
-                gethostbyname($this->settings['host']),
-                getservbyname('www', 'tcp')
+                $this->settings['host'],
+                $this->settings['port']
             );
     }
 }
