@@ -1,4 +1,4 @@
-/* Login form */
+/* Login and register forms */
 #login-content {
     background-image: linear-gradient(to bottom left, #CD5C5C, #353737);
     padding: 5%;
@@ -26,17 +26,13 @@
     background-color: #2e3572;
 }
 
-#login-content #login-form .login-button, #login-content #login-form .register-form-button {
+#login-content #login-form .login-button, #login-content #login-form .register-form-button, 
+#login-form .register-button {
     border: 1px solid #ddd;
     padding: 1%;
     font-family: 'Oxanium';
     color: #ddd;
     background-color: transparent;
-}
-
-#login-content #login-form input:focus {
-    color: white;
-    border:none;
 }
 
 #login-content #login-form .form-control {
@@ -48,4 +44,13 @@
 
 #login-content #user-auth{
     height: 100%;
+}
+
+#login-form #register .fa-chevron-left {
+    cursor: pointer;
+}
+
+.cir {
+    transform: rotateZ(360deg);
+    transition: transform 2s ease-in 100ms;
 }
