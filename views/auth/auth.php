@@ -32,7 +32,7 @@
 
                     <!-- Login form -->
                     <div class="col-lg-6 pt-4 text-white" id="login-form">
-                        <form action="/" method="post" class="text-white" id="login">
+                        <form action="/views/home.php" method="post" class="text-white" id="login">
                             <div class="form-group mt-4 mb-4">
                                 <input type="text" name="login" class="form-control" placeholder="Login">
                             </div>

@@ -54,3 +54,81 @@
     transform: rotateZ(360deg);
     transition: transform 2s ease-in 100ms;
 }
+
+/* Home */
+.navbar-coral {
+    background-color: #e76b6b;
+}
+
+#home-nav a.navbar-brand {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 100;
+    transition: 0.3s ease-in;
+}
+
+#home-nav a.navbar-brand:hover {
+    transform: scale(0.9)
+}
+
+#home-nav img {
+    width: 15%;
+    border-radius: 50%;
+    height: 90%;
+}
+
+#home-nav .ml-auto .nav-link {
+    cursor: pointer;
+    font-family: 'Oxanium';
+}
+
+#home-nav .dropdown a.text-muted {
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 1px;
+}
+
+#home-content {
+    height: 553px;
+}
+
+#home-content #dialogs {
+    border-right: 1px solid #ddd;
+    height: 553px;
+    max-width: 500px;
+}
+
+#home-content #dialogs #dialog {
+    border-bottom: 1px solid #ddd;
+    transition: 0.3s ease-in-out;
+}
+
+#home-content #dialogs #dialog:hover {
+    background-color: #ddd;
+    transition: background-color 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+#home-content #dialogs #dialog img.w-100 {
+    border-radius: 50%;
+}
+
+#home-content #dialogs #dialog p.title {
+    font-family: 'Oxanium';
+}
+
+#home-content #dialogs #dialog p.preview-text {
+    font-family: 'Nunito', sans-serif;
+}
+
+#home-content #content .preview p {
+    color: #ddd;
+    font-family: 'Oxanium';
+    margin-top: 150px;
+}
+
+#home-content #content #message-form {
+    margin-top: 409px;
+}
+
+.active-dialog {
+    transform: scale(0.9);
+}

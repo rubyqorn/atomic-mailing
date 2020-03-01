@@ -4,7 +4,9 @@ $(document).ready(function() {
     $('#login-form .register-form-button').click(function(event) {
         event.preventDefault();
 
-        $('#login-form').load('register.php');
+        $('#login-form').load('register.php', function() {
+            $.getScript('/public/js/app.js');
+        });
 
     });
 
@@ -19,7 +21,7 @@ $(document).ready(function() {
         $('#left-side-login .fa-atom').addClass('cir');
 
         setTimeout(function() {
-            window.location.href = 'http://localhost:2002/public/index.php';
+            window.location.href = 'http://localhost:2002/views/home.php';
         }, 2000)
     });
 
@@ -27,7 +29,7 @@ $(document).ready(function() {
     $('#login-form #register .register-button').click(function(event) {
         event.preventDefault();
 
-        $('#login-form .fa-atom').addClass('.cir');
+        $('#login-form .fa-atom').addClass('cir');
 
         setTimeout(function() {
             window.location.href = 'http://localhost:2002/public/index.php';
@@ -45,5 +47,23 @@ $(document).ready(function() {
         }
         
     });
+
+    // Show message form and add active class for dialog 
+    $('#home-content #dialogs #dialog').click(function() {
+        // Add active class for dialog
+        $('#home-content #dialogs #dialog').removeClass('active-dialog');
+        $(this).addClass('active-dialog');
+
+        // Remove preview message
+        $('#home-content #content .preview').remove();
+        
+        // Append message form into message content area
+        $('#message-form').removeClass(function() {
+            $(this).removeClass('d-none');
+            $('#home-content #content').append(this);
+        });
+
+        
+    })
 
 })
