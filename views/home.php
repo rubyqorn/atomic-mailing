@@ -109,27 +109,54 @@
                             Click at dialog for start chating
                         </p>
                     </div>
+
+                    <div class="col-lg-12 mt-4 d-none" id="messages-content">
+                        <div class="col-lg-12 d-flex flex-row">
+                            <div class="col-lg-1">
+                                <img src="/public/img/default-avatar.png" class="w-100" alt="">
+                            </div>
+                            <div class="col-lg-11 text-left">
+                                <p class="username">John Doe</p>
+                                <p class="message">
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, dicta.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 d-flex flex-row-reverse">
+                            <div class="col-lg-1 text-right">
+                                <img src="/public/img/default-avatar.png" class="w-100" alt="">
+                            </div>
+                            <div class="col-lg-11 text-right">
+                                <p class="username">John Doe</p>
+                                <p class="message">
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, dicta.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message form -->
+                    <div class="col-lg-12 bg-light p-1" id="message-form">
+                        <form action="/" method="post">
+                            <div class="form-group">
+                                <textarea name="message" class="form-control" id="message" cols="30" rows="2"></textarea>
+                            </div>
+                            <div class="form-group mb-0">
+                                <button class="btn btn-outline-danger btn-block text-uppercase ">
+                                    <small>
+                                        Send
+                                    </small>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                
                 </div>
 
             </div>
         </div>
     </main>
 
-    <!-- Message form -->
-    <div class="col-lg-12 bg-light p-1 d-none" id="message-form">
-        <form action="/" method="post">
-            <div class="form-group">
-                <textarea name="message" class="form-control" id="message" cols="30" rows="2"></textarea>
-            </div>
-            <div class="form-group mb-0">
-                <button class="btn btn-outline-danger btn-block text-uppercase ">
-                    <small>
-                        Send
-                    </small>
-                </button>
-            </div>
-        </form>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

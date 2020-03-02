@@ -54,14 +54,12 @@ $(document).ready(function() {
         $('#home-content #dialogs #dialog').removeClass('active-dialog');
         $(this).addClass('active-dialog');
 
-        // Remove preview message
+        // Remove preview message and show messages
         $('#home-content #content .preview').remove();
+        $('#home-content #content #messages-content').removeClass('d-none');
         
-        // Append message form into message content area
-        $('#message-form').removeClass(function() {
-            $(this).removeClass('d-none');
-            $('#home-content #content').append(this);
-        });
+        // Show message form
+        $('#message-form').addClass('show-message-form');
 
         
     })

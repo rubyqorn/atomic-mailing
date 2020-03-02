@@ -126,9 +126,47 @@
 }
 
 #home-content #content #message-form {
-    margin-top: 409px;
+    position: absolute;
+    top: 0;
+    margin-top: -300px;
+}
+
+#messages-content p.username {
+    color: #CD5C5C;
+    font-family: 'Oxanium';
+}
+
+#messages-content p.message {
+    font-family: 'Oxanium';
 }
 
 .active-dialog {
-    transform: scale(0.9);
+    animation: clickedDialog 0.2s ease-in-out;
+}
+
+.show-message-form {
+    animation: dropDialog 0.3s linear forwards;
+}
+
+/* Keyframes */
+
+@keyframes dropDialog {
+    from{
+        transform: translateY(0%)
+    }
+    to{
+        transform: translateY(710px)
+    }
+}
+
+@keyframes clickedDialog {
+    0%{
+        transform: scale(0.9);
+    }
+    50%{
+        transform: scale(0.8);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
