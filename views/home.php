@@ -10,10 +10,17 @@
     <title>Home</title>
 </head>
 <body>
+
+    <!-- Loader -->
+    <div class="container d-none" id="loader">
+        <div class="row justify-content-center">
+            <div class="spinner-border" role="status"></div>
+        </div>
+    </div>
     
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-coral" id="home-nav">
-        <a href="/" class="navbar-brand">Atomic Mailing</a>
+        <a href="/" class="navbar-brand link">Atomic Mailing</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item d-flex">
                 <img src="/public/img/default-avatar.png" alt="">
@@ -24,11 +31,11 @@
                     <div class="dropdown-menu">
                         <div class="d-flex dropdown-item">
                             <i class="fas fa-user mt-1 mr-2 text-muted"></i>
-                            <a href="/" class="text-muted">Settings</a>
+                            <a href="settings.php" class="text-muted link">Settings</a>
                         </div>
                         <div class="dropdown-item d-flex">
                             <i class="fa fa-cog text-muted mt-1 mr-2"></i>
-                            <a href="/" class="text-muted">Account</a>
+                            <a href="/" class="text-muted link">Account</a>
                         </div>
                     </div>
                 </div>

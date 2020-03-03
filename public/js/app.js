@@ -60,8 +60,48 @@ $(document).ready(function() {
         
         // Show message form
         $('#message-form').addClass('show-message-form');
-
         
+    });
+
+    // Show loader and redirect
+    $('#home-nav .link').click(function(event) {
+        event.preventDefault();
+        
+        let href = $(this).attr('href');
+
+        // Remove content blocks 
+        $('#home-nav').remove();
+        $('#home-content').remove();
+
+        // Remove class which hide loader
+        $('#loader').removeClass('d-none');
+
+        // Redirect user in 1,5 seconds
+        setTimeout(function() {
+            window.location.href = href;
+        }, 1500);
+            
+    })
+
+    // Show password and confirmation fields
+    $('#settings #user-settings-form .fa-eye').click(function() {
+        let passwordField = $('#settings #user-settings-form input[name="password"]');
+        let confirmationField = $('#settings #user-settings-form input[name="confirmation"]');
+
+        if ($(passwordField).attr('type') == 'password') {
+            $(passwordField).prop('type', 'text');
+            $(confirmationField).prop('type', 'text');
+        } else {
+            $(passwordField).prop('type', 'password');
+            $(confirmationField).prop('type', 'password');
+        }
+    });
+
+    // Append spinner into save settings button when click on it
+    $('#settings #user-settings-form .save-settings').click(function(event) {
+        event.preventDefault();
+        $(this).find('small').remove();
+        $(this).append('<div class="spinner-border spinner-border-sm" role="status"></div>');
     })
 
 })

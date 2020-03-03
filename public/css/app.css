@@ -56,6 +56,10 @@
 }
 
 /* Home */
+#loader {
+    margin-top: 300px;
+}
+
 .navbar-coral {
     background-color: #e76b6b;
 }
@@ -146,6 +150,58 @@
 
 .show-message-form {
     animation: dropDialog 0.3s linear forwards;
+}
+
+/* Settings */
+#settings {
+    background-image: url(../img/bg-image-settings.png);
+    height: 620px;
+    width: 100%;
+}
+
+#settings #account-settings {
+    margin-top: 40px;
+}
+
+#settings .overlay {
+    opacity: 0.8;
+    background-color: #e76b6b;
+    height: inherit;
+    width: inherit;
+}
+
+#settings #account-settings img {
+    border-radius: 50%;
+}
+
+#settings #account-settings #user-info .resources {
+    font-family: 'Oxanium';
+}
+
+#settings #user-settings-form label {
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+}
+
+#settings #user-settings-form input {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    font-family: 'Nunito', sans-serif;
+}
+
+#settings #user-settings-form .fa-eye {
+    cursor: pointer;
+}
+
+.save-settings {
+    border: none;
+    background-color: #CD5C5C;
+    color: #fff;
+    font-family: 'Oxanium';
+    padding: 7px 20px 7px 20px;
+    letter-spacing: 1px;
+    
 }
 
 /* Keyframes */
