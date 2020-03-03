@@ -104,4 +104,22 @@ $(document).ready(function() {
         $(this).append('<div class="spinner-border spinner-border-sm" role="status"></div>');
     })
 
+    // Make tab active and show content block
+    $('#account #tabs .nav-item').click(function() {
+        $('#account #tabs .nav-item').removeClass('active-tab');
+        $(this).addClass('active-tab');
+
+        let activeTab = $(this).attr('id');
+
+        if (activeTab == 'social') {
+            $('#account #user-info #default-info').addClass('d-none')
+
+            $('#account #user-info #social-links').removeClass('d-none').addClass('active-block');
+        } else if(activeTab == 'default') {
+            $('#account #user-info #social-links').addClass('d-none');
+
+            $('#account #user-info #default-info').removeClass('d-none').addClass('active-block');
+        }
+    });
+
 })

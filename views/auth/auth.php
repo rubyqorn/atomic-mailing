@@ -31,13 +31,13 @@
                     </div>
 
                     <!-- Login form -->
-                    <div class="col-lg-6 pt-4 text-white" id="login-form">
+                    <div class="col-lg-6 pt-4" id="login-form">
                         <form action="/views/home.php" method="post" class="text-white" id="login">
                             <div class="form-group mt-4 mb-4">
-                                <input type="text" name="login" class="form-control" placeholder="Login">
+                                <input type="text" name="login" class="form-control text-white" placeholder="Login">
                             </div>
                             <div class="form-group mt-4 mb-4">
-                                <input type="password" class="form-control" placeholder="Password" name="password">
+                                <input type="password" class="form-control text-white" placeholder="Password" name="password">
                                 <div class="custom-control custom-checkbox mt-2">
                                     <input type="checkbox" class="custom-control-input" id="show-password">
                                     <label for="show-password" class="custom-control-label">

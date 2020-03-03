@@ -62,7 +62,7 @@
                                         Name
                                     </small>
                                 </label>
-                                <input type="text" class="field" name="name" required>
+                                <input type="text" class="field" name="name" placeholder="John Doe" required>
                             </div>
                             <div class="form-group p-1 border">
                                 <label for="email" class="control-label text-muted text-uppercase">
@@ -70,7 +70,7 @@
                                         Email
                                     </small>
                                 </label>
-                                <input type="email" name="email" class="field" required>
+                                <input type="email" name="email" class="field" placeholder="example@mail.com" required>
                             </div>
                             <div class="form-group border p-1">
                                 <label for="website" class="control-label text-muted text-uppercase">
@@ -87,7 +87,7 @@
                                     </small>
                                 </label>
                                 <div class="d-flex">
-                                    <input type="password" name="password" class="field" required>
+                                    <input type="password" name="password" class="field" placeholder="6 symbols required" required>
                                     <i class="fas fa-eye text-muted mt-1 ml-1"></i>
                                 </div>
                             </div>

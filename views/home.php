@@ -35,7 +35,7 @@
                         </div>
                         <div class="dropdown-item d-flex">
                             <i class="fa fa-cog text-muted mt-1 mr-2"></i>
-                            <a href="/" class="text-muted link">Account</a>
+                            <a href="account.php" class="text-muted link">Account</a>
                         </div>
                     </div>
                 </div>
