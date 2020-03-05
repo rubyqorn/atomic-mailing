@@ -47,37 +47,105 @@
                     </ul>
                 </div>
 
+                <!-- Block with deful user information -->
                <div class="col-lg-7 mt-4" id="default-info">
-                   <ul class="user-default-content">
-                       <li class="user-item mt-4">
-                           <p class="text-black">John Doe</p>
-                       </li>
-                       <li class="user-item mt-4">
-                           <p class="text-black">https://vk.com/rubyqorn</p>
-                       </li>
-                       <li class="user-item mt-4">
-                           <p class="text-black">john@mail.com</p>
-                       </li>
-                   </ul>
+                   <form action="/" method="post">
+                        <div class="form-group d-flex justify-content-end">
+                            <button type="button" class="edit-button text-white mb-2">
+                                <i class="fas fa-pen"></i>                            
+                            </button>
+                            <button type="submit" class="h-100 d-none save-edits text-white text-uppercase">
+                                <small>
+                                    Save
+                                </small>
+                            </button>
+                        </div>
+
+                        <ul class="user-default-content">
+                            <li class="user-item mt-4">
+                                <p class="text-black">John Doe</p>
+                            </li>
+                            <li class="user-item mt-4">
+                                <p class="text-black">https://vk.com/rubyqorn</p>
+                            </li>
+                            <li class="user-item mt-4">
+                                <p class="text-black">john@mail.com</p>
+                            </li>
+                        </ul>
+
+                        <div class="d-none" id="edit-form">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control text-dark" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control text-dark" name="website" value="https://vk.com/rubyqorn">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control text-dark" name="email" value="john@email.com">
+                            </div>
+                        </div>
+                   </form>
+                   
                </div> 
 
+               <!-- Social links -->
                <div class="col-lg-7 mt-4 d-none" id="social-links">
+
+                    <!-- Edit button -->
+                    <div class="d-flex flex-row-reverse">
+                        <button type="button" class="edit-button text-white mb-2">
+                            <i class="fas fa-pen"></i>                            
+                        </button>
+                    </div>
+
                    <ul class="social-links-items">
                        <li class="social-link-item d-flex mt-4">
                            <i class="fab fa-twitter text-primary mt-1 mr-2"></i>
                            <a href="/" class="social-link">Twitter</a>
+                           <i class="fas fa-pen d-none" role="button" data-toggle="modal" data-target="#social-link"></i>
                         </li>
                        <li class="social-link-item d-flex mt-4">
                            <i class="fab fa-vk text-info mt-1 mr-2"></i>
                            <a href="/" class="social-link">Vkontakte</a>
+                           <i class="fas fa-pen d-none" role="button" data-toggle="modal" data-target="#social-link"></i>
                         </li>
                        <li class="social-link-item d-flex mt-4">
                            <i class="fab fa-discord text-black mt-1 mr-2"></i>
                            <a href="/" class="social-link">Discord</a>
+                           <i class="fas fa-pen d-none" role="button" data-toggle="modal" data-target="#social-link"></i>
                         </li>
                    </ul>
+
                </div>
                 
+            </div>
+        </div>
+
+        <!-- Modal window for editing social link -->
+        <div class="modal fade" id="social-link">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="text-muted">
+                            Edit
+                        </h5>
+                        <button class="close" data-dismiss="modal" data-target="#social-link">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <form action="/" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" name="website" class="form-control" value="https://twitter.com">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-outline-dark btn-sm text-uppercase">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 

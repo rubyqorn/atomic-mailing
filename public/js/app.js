@@ -112,14 +112,41 @@ $(document).ready(function() {
         let activeTab = $(this).attr('id');
 
         if (activeTab == 'social') {
-            $('#account #user-info #default-info').addClass('d-none')
+            $('#account #user-info #default-info').css({
+                marginLeft: "2000px"
+            }).addClass('d-none');
 
             $('#account #user-info #social-links').removeClass('d-none').addClass('active-block');
         } else if(activeTab == 'default') {
-            $('#account #user-info #social-links').addClass('d-none');
+            $('#account #user-info #social-links').addClass('d-none').css({
+                marginLeft: "2000px"
+            });
 
             $('#account #user-info #default-info').removeClass('d-none').addClass('active-block');
         }
+    });
+
+    // Show edit form in default info block
+    $('#account #default-info .edit-button').click(function() {
+        $(this).addClass('active-tab');
+
+        $('#account #default-info .save-edits').removeClass('d-none');
+        $('#account #default-info .user-default-content').addClass('d-none');
+        $('#account #default-info #edit-form').removeClass('d-none').addClass('show-form');
+    });
+
+    // When click at save editions button its will show spinner in button
+    $('#account #default-info .save-edits').click(function(event) {
+        event.preventDefault();
+
+        $(this).find('small').remove();
+        $(this).append('<div class="spinner-border spinner-border-sm" role="status"></div>');
+    });
+
+    // Show buttons which call modal windows by clicking
+    $('#account #social-links .edit-button').click(function() {
+        $(this).addClass('active-tab');
+        $('#account #social-links i[role="button"]').toggleClass('d-none');
     });
 
 })
