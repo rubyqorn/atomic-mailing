@@ -1,0 +1,18 @@
+{
+    "name": "rubyqorn/atomic-mailing",
+    "description": "Platform where users can send messages to each other",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Hideger",
+            "email": "example@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Atomic\\Core\\": "core/"
+        }
+    }
+}

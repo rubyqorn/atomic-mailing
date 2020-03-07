@@ -1,0 +1,7 @@
+{
+    "home": {
+        "parameters": null,
+        "controller": "HomeController",
+        "action": "showPage"
+    }
+}
