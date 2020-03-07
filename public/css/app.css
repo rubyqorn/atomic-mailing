@@ -64,6 +64,28 @@
     background-color: #e76b6b;
 }
 
+#home-nav i.fa-search {
+    cursor: pointer;
+}
+
+#home-nav #search-form {
+    border-bottom: 1px solid #ddd;
+    width: -40;
+}
+
+#home-nav #search-form input {
+    border: none;
+    background-color: transparent;
+    margin-top:5px; 
+    width: 330px;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+}
+
+#home-nav .search-button {
+    animation: moveSearchButton 0.2s ease-in forwards;
+}
+
 #home-nav a.navbar-brand {
     font-family: 'Nunito', sans-serif;
     font-weight: 100;
@@ -319,7 +341,29 @@
     animation: showForm 0.4s ease-in normal forwards;
 }
 
+.show-search-form {
+    animation: searchForm 0.4s ease-in normal forwards;
+}
+
 /* Keyframes */
+
+@keyframes searchForm {
+    from{
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(30px);
+    }
+}
+
+@keyframes moveSearchButton {
+    form {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(430px);
+    }
+}
 
 @keyframes dropDialog {
     from{

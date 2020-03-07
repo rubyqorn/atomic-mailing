@@ -20,7 +20,19 @@
     
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-coral" id="home-nav">
-        <a href="/" class="navbar-brand link">Atomic Mailing</a>
+        <a href="/" class="navbar-brand link mt-1">Atomic Mailing</a>
+        <ul class="navbar-nav">
+            <li class="nav-item mt-2 ml-4" id="search-icon">
+                <i class="fa fa-search text-white"></i>
+            </li>
+            <li class="nav-item d-none">
+                <form action="/" method="post" id="search-form">
+                    <div class="form-group m-0">
+                        <input type="search" name="search-users" class="search-field text-white" placeholder="@user">
+                    </div>
+                </form>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item d-flex">
                 <img src="/public/img/default-avatar.png" alt="">

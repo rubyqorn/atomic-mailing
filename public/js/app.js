@@ -149,4 +149,10 @@ $(document).ready(function() {
         $('#account #social-links i[role="button"]').toggleClass('d-none');
     });
 
+    $('#home-nav i.fa-search').click(function() {
+        $(this).remove();
+        $('#home-nav #search-icon').append('<button class="btn btn-sm btn-outline-dark search-button">Search</button>');
+        $('#home-nav li.d-none').removeClass('d-none').addClass('show-search-form');
+    });
+
 })
