@@ -12,7 +12,7 @@ class YamlRouteFormat implements IsYamlAble
      * 
      * @var string
      */ 
-    private $file;
+    protected $file;
 
     /**
      * Format name

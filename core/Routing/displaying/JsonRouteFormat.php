@@ -12,7 +12,7 @@ class JsonRouteFormat implements IsJsonAble
      * 
      * @var string
      */ 
-    private $file;
+    protected $file;
 
     /**
      * Format name
