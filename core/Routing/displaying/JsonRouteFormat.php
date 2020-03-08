@@ -26,6 +26,12 @@ class JsonRouteFormat implements IsJsonAble
         $this->file = $jsonFile;
     }
 
+    /**
+     * Validate file extension
+     * 
+     * @return bool
+     * @throws \Atomic\Core\Exceptions\InvalidArguments
+     */ 
     public function is() : bool
     {
         $extension = pathinfo($this->file)['extension'];
