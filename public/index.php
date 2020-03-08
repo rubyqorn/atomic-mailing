@@ -1,1 +1,3 @@
-<a href="/views/auth/auth.php">Login</a>
+<?php 
+
+require './vendor/autoload.php';

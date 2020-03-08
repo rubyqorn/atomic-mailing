@@ -12,7 +12,8 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Atomic\\Core\\": "core/"
+            "Atomic\\Core\\": "core/",
+            "Atomic\\Application\\": "application/" 
         }
     }
 }
