@@ -1,6 +1,5 @@
 {
-    "home": {
-        "parameters": null,
+    "/home": {
         "controller": "HomeController",
         "action": "showPage"
     }
