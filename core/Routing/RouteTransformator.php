@@ -9,7 +9,7 @@ class RouteTransformator extends RouteConfigurator
      * 
      * @var array
      */ 
-    protected $routes;
+    public $routes;
 
     /**
      * Route parameters
@@ -27,18 +27,11 @@ class RouteTransformator extends RouteConfigurator
     protected $parsedRoutes;
 
     /**
-     * Matched route with URI
-     * 
-     * @var string
-     */ 
-    protected $mathchedRoute;
-
-    /**
      * Initialize routes
      * 
      * @return array
      */ 
-    private function buildConfiguration()
+    public function buildConfiguration()
     {
         return $this->configurate();
     }
@@ -94,6 +87,14 @@ class RouteTransformator extends RouteConfigurator
             }
 
         }        
+    }
+
+    /**
+     * @return string
+     */ 
+    public function getMatchedRoute()
+    {
+        return $this->matchWithRequestUri();
     }
 
 }

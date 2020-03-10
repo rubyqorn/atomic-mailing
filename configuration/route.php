@@ -15,5 +15,5 @@ $extension = [
 # you can make it like this "{key}" => "regular expression pattern"
 
 $route_parameters = [
-    "{id}" => "([0-9+])"
+    "{id}" => "([0-9]+)"
 ];
