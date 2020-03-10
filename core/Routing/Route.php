@@ -1,6 +1,6 @@
 <?php 
 
-namespace Atomic\Routing;
+namespace Atomic\Core\Routing;
 
 class Route
 {
