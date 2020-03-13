@@ -37,6 +37,13 @@ class Item
     public $parameters = [];
 
     /**
+     * HTTP method
+     * 
+     * @var string
+     */ 
+    public $method;
+
+    /**
      * Positions of params in
      * route string
      * 
@@ -60,6 +67,7 @@ class Item
         foreach($this->transformator->buildConfiguration($this->getRouteString()) as $routeName => $routeValue) {
             $this->setControllerName($routeValue['controller']);
             $this->setActionName($routeValue['action']);
+            $this->setHttpMethodName($routeValue['method']);
         }
 
         $this->setParameters($this->searchParam());
@@ -139,6 +147,29 @@ class Item
     public function getActionName() : string 
     {
         return $this->action;
+    }
+
+    /**
+     * Get HTTP method from Item class and set it
+     * for method property
+     * 
+     * @param string $name 
+     * 
+     * @return string
+     */ 
+    protected function setHttpMethodName(string $name) 
+    {
+        return $this->method = $name;
+    }
+
+    /**
+     * Return HTTP method name
+     * 
+     * @return string
+     */ 
+    public function getHttpMethodName() : string 
+    {
+        return $this->method;
     }
  
     /**
