@@ -47,8 +47,8 @@ class HandleWithParams implements RouteHandler
      * @return mixed
      */ 
     public function handle()
-    {
-        if (!empty($this->route->getParameters())) {
+    {      
+        if (empty($this->route->getParameters())) {
             throw new InvalidArguments(
                 'Route parameters doesn\'t exsists. Have to use HandleWithourParams'
             );

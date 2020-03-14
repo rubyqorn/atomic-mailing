@@ -1,6 +1,7 @@
 {
     "/home": {
         "controller": "HomeController",
-        "action": "showPage"
+        "action": "showPage",
+        "method": "GET"
     }
 }

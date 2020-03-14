@@ -80,7 +80,7 @@ class RouteTransformator extends RouteConfigurator
     protected function matchWithRequestUri()
     {
         $this->parsedRoutes = $this->replaceRouteParameters();
-
+        
         foreach($this->parsedRoutes as $route => $pattern) {
             if (preg_match("#{$pattern}#", $_SERVER['REQUEST_URI'])) {
                 return $route;
