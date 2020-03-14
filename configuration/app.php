@@ -33,7 +33,17 @@ $start_point = [
  */ 
 $server_settings = [
     'host' => "localhost",
-    "port" => 8000
+    "port" => 8000,
+    "mode" => 'on'
+];
+
+/**
+ * External host and port of resource
+ */
+$external_server_settings = [
+    'host' => gethostbyname('https://example.com'),
+    'port' => getservbyname('www', 'tcp'),
+    'mode' => 'off'
 ];
 
 /**
