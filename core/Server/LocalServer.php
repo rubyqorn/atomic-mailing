@@ -3,16 +3,10 @@
 namespace Atomic\Core\Server;
 
 use Atomic\Core\Server\Interfaces\ServerRunner;
-use Atomic\Core\IAppRunner;
 
-class LocalServer implements ServerRunner, IAppRunner
+class LocalServer implements ServerRunner
 {
     public function runServer()
-    {
-        //
-    }
-
-    public function run()
     {
         //
     }

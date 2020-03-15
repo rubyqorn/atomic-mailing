@@ -13,7 +13,5 @@ class Kernel
      */ 
     protected $layers = [
         "routing" => "\Atomic\Core\Routing\Route",
-        "local_server" => "Atomic\Core\Server\LocalServer",
-        "socket_server" => "\Atomic\Core\Server\SocketServer"
     ];
 }

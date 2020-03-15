@@ -32,6 +32,8 @@ class Route implements IAppRunner
      */ 
     public function run()
     {
-        return RouteHandler::processing($this->routeItem);
+        if ($this->routeItem->method == $_SERVER['REQUEST_METHOD']) {
+            return RouteHandler::processing($this->routeItem);
+        }
     }
 }
