@@ -18,18 +18,18 @@ class SocketConnection implements ConnectionSetter
      * 
      * @var resource
      */ 
-    protected $socket;
+    public $socket;
 
     /**
      * @var resource
      */ 
-    protected $accept;
+    protected $createdSocket;
 
     public function __construct(array $settings)
     {
         $this->settings = $settings;
 
-        $this->socket = socket_create(
+        $this->createdSocket = socket_create(
             $this->settings['domain'], 
             $this->settings['type'], 
             $this->settings['protocol']
@@ -53,7 +53,7 @@ class SocketConnection implements ConnectionSetter
      */ 
     protected function bind()
     {
-        return socket_bind($this->socket, $this->settings['host'], $this->settings['port']);
+        return socket_bind($this->createdSocket, $this->settings['host'], $this->settings['port']);
     }
 
     /**
@@ -63,7 +63,7 @@ class SocketConnection implements ConnectionSetter
      */ 
     protected function listen()
     {
-        return socket_listen($this->socket, 5);
+        return socket_listen($this->createdSocket, 5);
     }
 
     /**
@@ -73,38 +73,6 @@ class SocketConnection implements ConnectionSetter
      */ 
     protected function accept()
     {
-        return $this->accept = socket_accept($this->socket);
-    }
-
-    /**
-     * Write message to socket
-     * 
-     * @param string $buffer 
-     * 
-     * @return int
-     */ 
-    protected function write(string $buffer)
-    {
-        return socket_write($this->socket, $buffer, strlen($buffer));
-    }
-
-    /**
-     * Read string
-     * 
-     * @return string
-     */ 
-    protected function read()
-    {
-        return socket_read($this->socket, 1024, PHP_NORMAL_READ);
-    }
-
-    /**
-     * Close socket connection
-     * 
-     * @return void
-     */ 
-    protected function close()
-    {
-        return socket_close($this->socket);
+        return $this->socket = socket_accept($this->createdSocket);
     }
 }
