@@ -13,4 +13,5 @@ autoloader();
 use Atomic\Core\App\App;
 
 $app = new App();
+$app->runLocalServer();
 

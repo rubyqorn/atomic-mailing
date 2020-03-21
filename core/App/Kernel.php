@@ -14,4 +14,14 @@ class Kernel
     protected $layers = [
         "routing" => "\Atomic\Core\Routing\Route",
     ];
+
+    /**
+     * List of available servers
+     * 
+     * @var array
+     */ 
+    protected $servers = [
+        "local" =>  "\Atomic\Core\Server\LocalServer",
+        "socket" => "\Atomic\Core\Server\SocketServer"
+    ];
 }

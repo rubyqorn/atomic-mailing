@@ -12,6 +12,11 @@ class App extends Kernel
      */ 
     private $layerInstances = [];
 
+    /**
+     * @var \Atomic\Core\Server\LocalServer
+     */ 
+    private $localServer;
+
     public function __construct()
     {
         foreach($this->layers as $layerName => $layer) {
@@ -20,5 +25,18 @@ class App extends Kernel
         }
 
         return $this->layerInstances;
+    }
+
+    /**
+     * Local server running. Connect to 
+     * configured host and port in /configuration/app.php
+     * file
+     * 
+     * @return void
+     */ 
+    public function runLocalServer()
+    {
+        $this->localServer = new $this->servers['local'];
+        return $this->localServer->runServer();
     }
 }
