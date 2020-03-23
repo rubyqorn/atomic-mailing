@@ -46,6 +46,7 @@ class HttpUser
         $this->parser = new HttpHeadersParser($this);
         
         $this->getHeaders();
+        $this->parser->requestHeaders();
     }
 
     public function getHeaders()
