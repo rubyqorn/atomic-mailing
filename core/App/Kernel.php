@@ -12,6 +12,7 @@ class Kernel
      * @var array
      */ 
     protected $layers = [
+        "http" => "\Atomic\Core\Http\Http",
         "routing" => "\Atomic\Core\Routing\Route",
     ];
 

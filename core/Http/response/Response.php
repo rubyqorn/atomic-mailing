@@ -42,4 +42,40 @@ class Response implements Http
     {
         return header($header . ':'. $value);
     }
+
+    /**
+     * Set 404 error in HTTP headers and return code 
+     * of error
+     * 
+     * @return string
+     */ 
+    public function notFound()
+    {
+        header('HTTP/1.1 404 Not Found');
+        return '404';
+    }
+
+    /**
+     * Set 403 error in HTTP headers and return code 
+     * of error
+     * 
+     * @return string
+     */ 
+    public function forbidden()
+    {
+        header('HTTP/1.1 403 Forbidden');
+        return '403';
+    }
+
+    /**
+     * Set 405 error in HTTP headers and return code 
+     * of error
+     * 
+     * @return string
+     */ 
+    public function methodNotAllowed()
+    {
+        header('HTTP/1.1 405 Method Not Allowed');
+        return '405';
+    }
 }

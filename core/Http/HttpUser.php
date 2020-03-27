@@ -3,19 +3,13 @@
 namespace Atomic\Core\Http;
 
 use Atomic\Core\Http\Interfaces\Http;
-use Atomic\Core\Http\Parser\HttpHeadersParser;
 
-class HttpUser 
+class HttpUser
 {
     /**
      * @var \Atomic\Core\Http\Interfaces\Http
      */ 
     protected $http;
-
-    /**
-     * @var \Atomic\Core\Http\Parser\HttpHeadersParser
-     */ 
-    protected $parser;
 
     /**
      * List of response or request
@@ -43,12 +37,14 @@ class HttpUser
     {
         $this->http = $http;
         $this->headers = $this->http->getHeaders();
-        $this->parser = new HttpHeadersParser($this);
-        
         $this->getHeaders();
-        $this->parser->requestHeaders();
     }
 
+    /**
+     * Get reesponse or request HTTP headers
+     * 
+     * @return array
+     */ 
     public function getHeaders()
     {
         if (isset($this->headers['0'])) {
