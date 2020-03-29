@@ -23,6 +23,11 @@ class InformationalResponse implements HttpCode
     protected $doesExists = false;
 
     /**
+     * @var string
+     */ 
+    protected $headerString;
+
+    /**
      * Validate HTTP code in codes array
      * 
      * @param int $httpCode 
@@ -38,5 +43,20 @@ class InformationalResponse implements HttpCode
         }
 
         return $this->doesExists;
+    }
+
+    /**
+     * Validate code and return HTTP string with code 
+     * 
+     * @param int $httpCode 
+     * 
+     * @return string
+     */ 
+    public function getHeaderString(int $httpCode) :string
+    {
+        if ($this->validate($httpCode)) {
+            $this->headerString = array_keys(self::HTTP_CODES, $httpCode);
+            return $httpCode . ' ' . $this->headerString['0'];
+        }
     }
 }   

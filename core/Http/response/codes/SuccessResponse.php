@@ -27,6 +27,11 @@ class SuccesResponse implements HttpCode
     protected $doesExists = false;
 
     /**
+     * @var string
+     */ 
+    protected $headerString;
+
+    /**
      * Validate HTTP codes in array codes
      * 
      * @param int $httpCode
@@ -42,5 +47,20 @@ class SuccesResponse implements HttpCode
         }
 
         return $this->doesExists;
+    }
+
+    /**
+     * Validate code and return HTTP string with code 
+     * 
+     * @param int $httpCode 
+     * 
+     * @return string
+     */ 
+    public function getHeaderString(int $httpCode) :string
+    {
+        if ($this->validate($httpCode)) {
+            $this->headerString = array_keys(self::HTTP_CODES, $httpCode);
+            return $httpCode . ' ' . $this->headerString['0'];
+        }
     }
 }

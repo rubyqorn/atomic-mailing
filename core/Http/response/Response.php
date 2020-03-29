@@ -3,6 +3,7 @@
 namespace Atomic\Core\Http\Response;
 
 use Atomic\Core\Http\Interfaces\Http;
+use Atomic\Core\Http\Response\Codes\CodeHandler;
 
 class Response implements Http
 {
@@ -13,9 +14,15 @@ class Response implements Http
      */ 
     protected $host;
 
+    /**
+     * @var \Atomic\Core\Http\Response\Codes\CodeHandler
+     */ 
+    protected $codeHandler;
+
     public function __construct(string $host)
     {
         $this->host = $host;
+        $this->codeHandler = new CodeHandler();
     }
 
     /**
@@ -44,38 +51,15 @@ class Response implements Http
     }
 
     /**
-     * Set 404 error in HTTP headers and return code 
-     * of error
+     * Set HTTP message with code in headers list
      * 
-     * @return string
-     */ 
-    public function notFound()
-    {
-        header('HTTP/1.1 404 Not Found');
-        return '404';
-    }
-
-    /**
-     * Set 403 error in HTTP headers and return code 
-     * of error
+     * @param string $typeOfCode
+     * @param int $code 
      * 
-     * @return string
+     * @return void
      */ 
-    public function forbidden()
+    public function setHttpCode(string $typeOfCode, int $code)
     {
-        header('HTTP/1.1 403 Forbidden');
-        return '403';
-    }
-
-    /**
-     * Set 405 error in HTTP headers and return code 
-     * of error
-     * 
-     * @return string
-     */ 
-    public function methodNotAllowed()
-    {
-        header('HTTP/1.1 405 Method Not Allowed');
-        return '405';
+        return header($this->codeHandler->handle($typeOfCode, $code));
     }
 }
