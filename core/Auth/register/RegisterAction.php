@@ -24,9 +24,39 @@ class RegisterAction implements Process
     protected ?PasswordFacade $passwordFacade = null;
 
     /**
+     * @var \Atomic\Core\Http\Request\Request|null
+     */ 
+    protected ?Request $request = null;
+
+    /**
+     * @var \Atomic\Core\Auth\Interfaces\UserManipulations|null
+     */ 
+    protected ?UserInfoValidator $user = null;
+
+    /**
+     * Success message
+     * 
+     * @var string
+     */ 
+    protected string $success = 'Account registered';
+
+    /**
+     * Error message 
+     * 
+     * @var string
+     */ 
+    protected string $error = 'Account already exists';
+
+    /**
      * @var array
      */ 
     public array $validatedContent;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+        $this->user = new UserInfoValidator($this->request->post('email'));
+    }
 
     /**
      * Get instance of RegisterRequestProcessor
@@ -49,35 +79,40 @@ class RegisterAction implements Process
     /**
      * Register process handling
      * 
-     * @param \Atomic\Core\Http\Request\Request $request
      * @param array $rules 
      * 
      * @throws \Atomic\Core\Exceptions\InvalidArguments
      * @return array|Atomic\Core\Auth\Interfaces\Process
      */ 
-    public function handle(Request $request, array $rules) 
+    public function handle(array $rules) 
     {
         $this->processor = $this->getProcessor();
         $this->passwordFacade = $this->getHasher();
         
         if (!$this->processor->processing($rules) && 
-            $this->processor->validate($request, $rules)
+            $this->processor->validate($this->request, $rules)
         ) {
             throw new InvalidArguments('Invalid rule name');
         }
 
-        $this->validatedContent = $this->processor->validate($request, $rules);
+        $this->validatedContent = $this->processor->validate($this->request, $rules);
 
-        if (!isset($this->validatedContent['password'])) {
+        if (!$this->user->makeHash($this->passwordFacade, $this->validatedContent)) {
             return $this->validatedContent;
         }
 
-        $this->validatedContent['password'] = $this->passwordFacade
-                                                    ->hasher->manipulate(
-                                                        $this->validatedContent['password']
-                                                    );
+        
+        $fields = $this->user->makeHash(
+            $this->passwordFacade, 
+            $this->validatedContent
+        );
 
-        return $this;
+        if ($this->user->pushUserDataInDatabase($fields)) {
+            return $this->success;
+        }
+
+        return $this->error;
+        
     }
 
     /**
@@ -92,16 +127,5 @@ class RegisterAction implements Process
     public function makeSession(Response $response, string $sessionName, string $sessionValue)
     {   
         return $response->setSession($sessionName, $sessionValue);
-    }
-
-    /**
-     * Push user registration data in database
-     * if user is not exists
-     * 
-     * @param array $formData
-     */ 
-    public function pushUserData(array $formData)
-    {
-        //
     }
 }
