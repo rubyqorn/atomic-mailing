@@ -50,7 +50,7 @@ class HandleWithParams implements RouteHandler
     {      
         if (empty($this->route->getParameters())) {
             throw new InvalidArguments(
-                'Route parameters doesn\'t exsists. Have to use HandleWithourParams'
+                'Route parameters doesn\'t exsists. Have to use HandleWithoutParams'
             );
         }
 

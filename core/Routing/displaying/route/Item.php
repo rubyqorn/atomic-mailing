@@ -64,7 +64,11 @@ class Item
      */ 
     protected function processing()
     {
-        foreach($this->transformator->buildConfiguration($this->getRouteString()) as $routeName => $routeValue) {
+        $currentRouteSettings[] = $this->transformator->buildConfiguration(
+            $this->getRouteString()
+        )[$this->getRouteString()];
+        
+        foreach($currentRouteSettings as $routeName => $routeValue) {
             $this->setControllerName($routeValue['controller']);
             $this->setActionName($routeValue['action']);
             $this->setHttpMethodName($routeValue['method']);
