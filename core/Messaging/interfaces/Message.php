@@ -1,15 +1,13 @@
 <?php 
 
-namespace Atomic\Core\Messages\Interfaces;
+namespace Atomic\Core\Messaging\Interfaces;
 
 interface Message 
 {
     /**
-     * @param string $from 
-     * @param string $to 
-     * @param string $message 
+     * @param array $sendInfo
      * 
      * @return void
      */ 
-    public function send(string $from, string $to, string $message);
+    public function send(array $sendInfo);
 }

@@ -6,5 +6,13 @@ use Atomic\Core\Messaging\Interfaces\isSendAble;
 
 class SMSMessage extends AbstractSMS implements isSendAble
 {
+    public function __construct(string $file)
+    {
+        
+    }
 
+    public function setSettings()
+    {
+        
+    }
 }
