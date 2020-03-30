@@ -2,8 +2,6 @@
 
 namespace Atomic\Core\Auth\Interfaces;
 
-use Atomic\Core\Http\Request\Request;
-
 interface Process
 {
     /**
@@ -21,5 +19,5 @@ interface Process
      * 
      * @return array|\Atomic\Core\Auth\Interfaces\Process
      */ 
-    public function handle(Request $request, array $rules);
+    public function handle(array $rules);
 }

@@ -20,9 +20,9 @@ class Authorization extends AuthEntity implements Auth
      * 
      * @return \Atomic\Core\Auth\Login\LoginAction
      */ 
-    public function login() :LoginAction
+    public function login(Request $request) :LoginAction
     {
-        return new LoginAction();
+        return new LoginAction($request);
     }
 
     /**
@@ -30,8 +30,8 @@ class Authorization extends AuthEntity implements Auth
      * 
      * @return \Atomic\Core\Auth\Register\RegisterAction
      */ 
-    public function register() :RegisterAction
+    public function register(Request $request) :RegisterAction
     {
-        return new RegisterAction();
+        return new RegisterAction($request);
     }
 }

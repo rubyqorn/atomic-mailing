@@ -94,6 +94,18 @@ class Response implements Http
     }
 
     /**
+     * Return session value by name
+     * 
+     * @param string $sessionName
+     * 
+     * @return string
+     */ 
+    public function session(string $sessionName)
+    {
+        return $this->session[$sessionName];
+    }
+
+    /**
      * Cookie setting
      * 
      * @param string $name 
