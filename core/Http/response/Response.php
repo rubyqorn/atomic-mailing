@@ -19,10 +19,27 @@ class Response implements Http
      */ 
     protected $codeHandler;
 
+    /**
+     * Session array
+     * 
+     * @var array
+     */ 
+    protected $session;
+
+    /**
+     * Cookie array
+     * 
+     * @var array
+     */ 
+    protected $cookie;
+
     public function __construct(string $host)
     {
         $this->host = $host;
         $this->codeHandler = new CodeHandler();
+
+        $this->session = $_SESSION;
+        $this->cookie = $_COOKIE;
     }
 
     /**
@@ -61,5 +78,42 @@ class Response implements Http
     public function setHttpCode(string $typeOfCode, int $code)
     {
         return header($this->codeHandler->handle($typeOfCode, $code));
+    }
+
+    /**
+     * Session setting
+     * 
+     * @param string $name 
+     * @param mixed $value 
+     * 
+     * @return bool;
+     */ 
+    public function setSession(string $name, $value) 
+    {
+        return $this->session[$name] = $value;
+    }
+
+    /**
+     * Cookie setting
+     * 
+     * @param string $name 
+     * @param string $value
+     * @param int $expires 
+     * @param string $path 
+     * @param string $domain 
+     * @param bool $secure 
+     * @param bool $httpOnly
+     * 
+     * @return bool
+     */ 
+    public function setCookies(
+        string $name, string $value, int $expires, 
+        string $path = '', string $domain = '',
+        bool $secure = false, bool $httpOnly = false
+    ){
+        return setcookie(
+            $name, $value, $expires, 
+            $path, $domain, $secure, $httpOnly
+        );
     }
 }
