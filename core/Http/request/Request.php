@@ -3,6 +3,7 @@
 namespace Atomic\Core\Http\Request;
 
 use Atomic\Core\Http\Interfaces\Http;
+use Atomic\Core\Validator\Validator;
 
 class Request implements Http 
 {
@@ -47,6 +48,11 @@ class Request implements Http
      * @var array 
      */ 
     protected $cookie;
+ 
+    /**
+     * @var \Atomic\Core\Validator\Validator
+     */ 
+    private ?Validator $validator = null;
 
     public function __construct(string $host)
     {
@@ -81,6 +87,18 @@ class Request implements Http
     public function setHeaders(string $header, string $value)
     {
         return header($header . ':' . $value);
+    }
+
+    /**
+     * Get request Validator instance
+     * 
+     * @param array $fields 
+     * 
+     * @return \Atomic\Core\Validator\Validator
+     */ 
+    public function validator(array $fields) :Validator
+    {
+        return $this->validator = new Validator($fields);
     }
 
     /**

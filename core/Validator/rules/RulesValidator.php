@@ -2,6 +2,8 @@
 
 namespace Atomic\Core\Validator\Rules;
 
+use Atomic\Core\Exceptions\InvalidArguments;
+
 class RulesValidator extends Rules 
 {
     /**
@@ -24,6 +26,16 @@ class RulesValidator extends Rules
     protected function validateRule()
     {
         if (in_array($this->rule, $this->rulesList)) {
+            return true;
+        }
+        
+        if (!strpos($this->rule, '|')) {
+            throw new InvalidArguments('Wrong rule name. Rule name doesn\'t exists');
+        }
+
+        $rule = substr($this->rule, 0, strpos($this->rule, '|'));
+
+        if (in_array($rule, $this->rulesList)) {
             return true;
         }
     }
