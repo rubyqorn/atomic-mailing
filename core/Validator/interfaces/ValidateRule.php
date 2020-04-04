@@ -9,5 +9,7 @@ interface ValidateRule
      * 
      * @param string $rule 
      */ 
-    public static function validate(string $rule);
+    public static function validate(string $rule, $item);
+
+    public static function validateRuleStatement(string $rule) :string; 
 }
