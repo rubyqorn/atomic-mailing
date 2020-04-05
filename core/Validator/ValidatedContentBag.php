@@ -4,10 +4,10 @@ namespace Atomic\Core\Validator;
 
 use Atomic\Core\Validator\Interfaces\ContentBag;
 
-class ErrorBag implements ContentBag
+class ValidatedContentBag implements ContentBag
 {
     /**
-     * Error messages
+     * List of validated content
      * 
      * @var array
      */ 
@@ -26,28 +26,12 @@ class ErrorBag implements ContentBag
     }
 
     /**
-     * Return list of exists messages
+     * Return list of recorded messages
      * 
      * @return array
      */ 
     public function getAll() :array
     {
         return $this->messages;
-    }
-
-    /**
-     * Get last error from array
-     * 
-     * @return string
-     */ 
-    protected function lastError()
-    {
-        $lastError = array_pop($this->messages);
-        return $lastError;
-    }
-
-    public function __toString()
-    {
-        return $this->lastError();
     }
 }

@@ -30,14 +30,24 @@ class Validator extends RulesValidator
     protected array $ruleStatus = [];
 
     /**
-     * @var \Atomic\Core\Validator\ErrorBag|null
+     * @var \Atomic\Core\Validator\Interfaces\ContentBag|null
      */
-    private ?ErrorBag $bag = null;
+    private ?ContentBag $errorbag = null;
+
+    /**
+     * @var \Atomic\Core\Validator\Interfaces\ContentBag|null
+     * */ 
+    private ?ContentBag $contentBag = null;
+
+    protected array $errors = [];
+
+    protected array $content = [];
 
     public function __construct(array $rules)
     {
         $this->rules = $rules;
-        $this->bag = new ErrorBag();
+        $this->errorBag = new ErrorBag();
+        $this->contentBag = new ValidatedContentBag();
 
         foreach($this->rules as $field => $rule) {
             parent::__construct($rule);
