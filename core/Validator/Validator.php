@@ -4,6 +4,7 @@ namespace Atomic\Core\Validator;
 
 use Atomic\Core\Validator\Rules\RulesValidator;
 use Atomic\Core\Exceptions\InvalidArguments;
+use Atomic\Core\Validator\Interfaces\ContentBag;
 use Atomic\Core\Validator\Rules\Rule\{
     EmailRule,
     ImageRule,
@@ -39,8 +40,18 @@ class Validator extends RulesValidator
      * */ 
     private ?ContentBag $contentBag = null;
 
+    /**
+     * All validation errors
+     * 
+     * @var array
+     */ 
     protected array $errors = [];
 
+    /**
+     * All validated content
+     * 
+     * @var array
+     */ 
     protected array $content = [];
 
     public function __construct(array $rules)
@@ -56,9 +67,13 @@ class Validator extends RulesValidator
     }
 
     /**
-     * Validate fields by rule name
+     * Validate fields by rule name and field
+     * and if exists error return array with 
+     * errors or validated content
+     * 
+     * @return array|null
      */ 
-    public function validate()
+    public function validate() :?array
     {   
         if (isset($_POST)) {
 
@@ -66,27 +81,27 @@ class Validator extends RulesValidator
 
                 switch($rule) {
                     case 'email': 
-                        return EmailRule::validate($rule, $_POST[$field]);
+                        $this->email($rule, $_POST[$field]);
                     break;
 
                     case 'image': 
-                        return ImageRule::validate($rule, $_POST[$field]);
+                        $this->image($rule, $_POST[$field]);
                     break;
 
                     case 'max-val': 
-                        return MaxValRule::validate($rule, $_POST[$field]);
+                        $this->max($rule, $_POST[$field]);
                     break;
 
                     case 'min-val': 
-                        return MinValRule::validate($rule, $_POST[$field]);
+                        $this->min($rule, $_POST[$field]);
                     break;
 
                     case 'small-string': 
-                        return SmallStringRule::validate($rule, $_POST[$field]);
+                        $this->smallStr($rule, $_POST[$field]);
                     break;
 
                     case 'text':
-                        return TextRule::validate($rule, $_POST[$field]);
+                        $this->text($rule, $_POST[$field]);
                     break;
 
                     default: 
@@ -96,6 +111,144 @@ class Validator extends RulesValidator
 
             }
 
+            $this->errors = $this->errorBag->getAll();
+            $this->content = $this->contentBag->getAll();
+
+            if (!empty($this->errors)) {
+                return $this->errors;
+            }
+
+            return $this->content;
         }
     }
+
+    /**
+     * Validate email field
+     * 
+     * @param string $rule 
+     * @param string $field 
+     * 
+     * @return string
+     */ 
+    protected function email(string $rule, string $field) :string
+    {
+        $validation = EmailRule::validate($rule, $field);
+
+        if ($validation == false) {
+            return $this->errorBag->recording(
+                'Typed email doesn\'t match with pattern'
+            );
+        }
+
+        return $this->contentBag->recording($validation);
+    }
+
+    /**
+     * Validate image field
+     * 
+     * @param string $rule 
+     * @param string $field 
+     * 
+     * @return string
+     */
+    protected function image(string $rule, string $field) :string
+    {
+        $validation = ImageRule::validate($rule, $field);
+
+        if ($validation == false) {
+            return $this->errorBag->recording(
+                'Format of file have to be like png, jpeg, bmp, webp or gif'
+            );
+        }
+
+        return $this->contentBag->recording($validation);
+    }
+
+    /**
+     * Validate field by string length
+     * 
+     * @param string $rule 
+     * @param string $field 
+     * 
+     * @return string
+     */
+    protected function max(string $rule, string $field) :string
+    {
+        $validation = MaxValueRule::validate($rule, $field);
+
+        if ($validation == false) {
+            return $this->errorBag->recording(
+                'Field content exseeds the limit'
+            );
+        }
+
+        return $this->contentBag->recording($validation);
+    }
+
+    /**
+     * Validate field by string length
+     * 
+     * @param string $rule 
+     * @param string $field 
+     * 
+     * @return string
+     */
+    protected function min(string $rule, string $field) :string
+    {
+        $validation = MinValueRule::validate($rule, $field);
+
+        if ($validation == false) {
+            return $this->errorBag->recording(
+                'Field content exseeds the limit'
+            );
+        }
+
+        return $this->contentBag->recording($validation);
+    }
+
+    /**
+     * Validate field by string length.
+     * Its doesn't have to be bigger 
+     * than 90 symbols
+     * 
+     * @param string $rule 
+     * @param string $field 
+     * 
+     * @return string
+     */
+    protected function smallStr(string $rule, string $field) :string
+    {
+        $validation = SmallStringRule::validate($rule, $field);
+
+        if ($validation == false) {
+            return $this->errorBag->recording(
+                'Field content exseeds 90 symbols'
+            );
+        }
+
+        return $this->contentBag->recording($validation);
+    }
+
+    /**
+     * Validate field by string length.
+     * Its doesn't have to be bigger 
+     * than 500 symbols
+     * 
+     * @param string $rule 
+     * @param string $field 
+     * 
+     * @return string
+     */
+    protected function text(string $rule, string $field) :string
+    {
+        $validation = SmallStringRule::validate($rule, $field);
+
+        if ($validation == false) {
+            return $this->errorBag->recording(
+                'Field content exseeds 500 symbols'
+            );
+        }
+
+        return $this->contentBag->recording($validation);
+    } 
 }
