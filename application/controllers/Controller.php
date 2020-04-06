@@ -5,7 +5,7 @@ namespace Atomic\Application\Controllers;
 use Atomic\Core\Http\Request\Request;
 use Atomic\Core\Http\Response\Response;
 use Atomic\Core\Http\Interfaces\Http;
-use Atomic\Core\Auth\AuthEntity;
+use Atomic\Core\Auth\Authorization;
 
 class Controller 
 {
@@ -22,7 +22,7 @@ class Controller
     /**
      * @var \Atomic\Core\Auth\AuthEntity|null
      */ 
-    protected ?AuthEntity $auth = null;
+    protected ?Authorization $auth = null;
 
     /**
      * Server settings which contains
@@ -45,7 +45,7 @@ class Controller
         $this->host = $this->getHost();
         $this->request = new Request("{$this->host}{$_SERVER['REQUEST_URI']}");
         $this->response = new Response("{$this->host}{$this->request->currentUri()}");
-        $this->auth = new AuthEntity($this->request, $this->response);
+        $this->auth = new Authorization($this->request, $this->response);
     }
 
     /**
