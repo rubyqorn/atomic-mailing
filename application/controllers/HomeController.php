@@ -2,7 +2,7 @@
 
 namespace Atomic\Application\Controllers;
 
-class HomeController
+class HomeController extends Controller
 {
     public function showPage()
     {
