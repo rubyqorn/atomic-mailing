@@ -47,11 +47,13 @@ class ImageRule implements ValidateRule
      * 
      * @return string
      */ 
-    public static function validateRuleStatement(string $rule) :string
+    public static function validateRuleStatement(string $rule) :?string
     {
         if (self::IMAGE_RULE == $rule) {
             return $rule;
         }
+
+        return false;
     }
 
     /**

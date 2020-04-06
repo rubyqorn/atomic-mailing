@@ -11,5 +11,12 @@ interface ValidateRule
      */ 
     public static function validate(string $rule, $item);
 
-    public static function validateRuleStatement(string $rule) :string; 
+    /**
+     * Validate if rule contains in rules list
+     * 
+     * @param string $rule 
+     * 
+     * @return string|null
+     */ 
+    public static function validateRuleStatement(string $rule) :?string; 
 }

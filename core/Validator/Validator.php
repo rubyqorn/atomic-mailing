@@ -9,8 +9,8 @@ use Atomic\Core\Validator\Rules\Rule\{
     EmailRule,
     ImageRule,
     TextRule,
-    MinValRule,
-    MaxValRule,
+    MinValueRule,
+    MaxValueRule,
     SmallStringRule
 };
 
@@ -54,6 +54,13 @@ class Validator extends RulesValidator
      */ 
     protected array $content = [];
 
+    /**
+     * Min or max rule name
+     * 
+     * @var string
+     */ 
+    protected $rangeRule;
+
     public function __construct(array $rules)
     {
         $this->rules = $rules;
@@ -61,7 +68,11 @@ class Validator extends RulesValidator
         $this->contentBag = new ValidatedContentBag();
 
         foreach($this->rules as $field => $rule) {
-            parent::__construct($rule);
+
+            $this->matchRangeRule($rule);
+
+            parent::__construct($this->rangeRule ? $this->rangeRule : $rule);
+
             $this->ruleStatus[$field] = $this->validateRule();
         }
     }
@@ -79,7 +90,9 @@ class Validator extends RulesValidator
 
             foreach($this->rules as $field => $rule) {
 
-                switch($rule) {
+                $this->matchRangeRule($rule);
+
+                switch($this->rangeRule ? $this->rangeRule : $rule) {
                     case 'email': 
                         $this->email($rule, $_POST[$field]);
                     break;
@@ -119,6 +132,21 @@ class Validator extends RulesValidator
             }
 
             return $this->content;
+        }
+    }
+
+    /**
+     * Return trimed rule name if match 
+     * with regular expression pattern
+     * 
+     * @param string $rule 
+     * 
+     * @return string
+     */ 
+    private function matchRangeRule(string $rule) 
+    {
+        if (preg_match("#min-val|.#", $rule) || preg_match('#max-val|.#', $rule)) {
+            return $this->rangeRule = substr($rule, 0, strpos($rule, '|')); 
         }
     }
 
@@ -241,7 +269,7 @@ class Validator extends RulesValidator
      */
     protected function text(string $rule, string $field) :string
     {
-        $validation = SmallStringRule::validate($rule, $field);
+        $validation = TextRule::validate($rule, $field);
 
         if ($validation == false) {
             return $this->errorBag->recording(

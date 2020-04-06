@@ -43,11 +43,13 @@ class TextRule implements ValidateRule, ValuesComparison
      * 
      * @return string
      */ 
-    public static function validateRuleStatement(string $rule) :string 
+    public static function validateRuleStatement(string $rule) :?string 
     {
         if (self::TEXT_RULE == $rule) {
             return $rule;
         }
+
+        return false;
     }
 
     /**

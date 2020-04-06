@@ -43,11 +43,13 @@ class SmallStringRule implements ValidateRule, ValuesComparison
      * 
      * @return string
      */ 
-    public static function validateRuleStatement(string $rule) :string 
+    public static function validateRuleStatement(string $rule) :?string 
     {
         if (self::SMALL_STRING_RULE == $rule) {
             return $rule;
         }
+
+        return false;
     }
 
     /**

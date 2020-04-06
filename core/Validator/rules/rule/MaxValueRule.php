@@ -41,11 +41,13 @@ class MaxValueRule implements ValidateRule, ValuesComparison
      * 
      * @return string
      */ 
-    public static function validateRuleStatement(string $rule) :string
+    public static function validateRuleStatement(string $rule) :?string
     {
         if (self::MAX_VALUE == $rule) {
             return $rule;
         }
+
+        return false;
     }
 
     /**

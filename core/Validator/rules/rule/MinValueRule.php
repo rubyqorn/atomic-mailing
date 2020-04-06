@@ -13,7 +13,7 @@ class MinValueRule implements ValidateRule, ValuesComparison
      * 
      * @var string
      */ 
-    private const MIN_VALUE = 'max-val';
+    private const MIN_VALUE = 'min-val';
 
     /**
      * Validate if string more or less specified
@@ -41,11 +41,13 @@ class MinValueRule implements ValidateRule, ValuesComparison
      * 
      * @return string
      */ 
-    public static function validateRuleStatement(string $rule) :string
+    public static function validateRuleStatement(string $rule) :?string
     {
         if (self::MIN_VALUE == $rule) {
             return $rule;
         }
+
+        return false;
     }
 
     /**
@@ -71,7 +73,7 @@ class MinValueRule implements ValidateRule, ValuesComparison
      */ 
     public static function comparison($externalItem, int $size)
     {
-        if (strlen($externalItem) <= $size) {
+        if (strlen($externalItem) >= $size) {
             return $externalItem;
         }
     }
