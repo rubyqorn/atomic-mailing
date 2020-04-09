@@ -94,27 +94,27 @@ class Validator extends RulesValidator
 
                 switch($this->rangeRule ? $this->rangeRule : $rule) {
                     case 'email': 
-                        $this->email($rule, $_POST[$field]);
+                        $this->email($rule, $_POST[$field], $field);
                     break;
 
                     case 'image': 
-                        $this->image($rule, $_POST[$field]);
+                        $this->image($rule, $_POST[$field], $field);
                     break;
 
                     case 'max-val': 
-                        $this->max($rule, $_POST[$field]);
+                        $this->max($rule, $_POST[$field], $field);
                     break;
 
                     case 'min-val': 
-                        $this->min($rule, $_POST[$field]);
+                        $this->min($rule, $_POST[$field], $field);
                     break;
 
                     case 'small-string': 
-                        $this->smallStr($rule, $_POST[$field]);
+                        $this->smallStr($rule, $_POST[$field], $field);
                     break;
 
                     case 'text':
-                        $this->text($rule, $_POST[$field]);
+                        $this->text($rule, $_POST[$field], $field);
                     break;
 
                     default: 
@@ -158,7 +158,7 @@ class Validator extends RulesValidator
      * 
      * @return string
      */ 
-    protected function email(string $rule, string $field) :string
+    protected function email(string $rule, string $field, string $fieldName) :string
     {
         $validation = EmailRule::validate($rule, $field);
 
@@ -168,7 +168,7 @@ class Validator extends RulesValidator
             );
         }
 
-        return $this->contentBag->recording($validation);
+        return $this->contentBag->recording($validation, $fieldName);
     }
 
     /**
@@ -179,7 +179,7 @@ class Validator extends RulesValidator
      * 
      * @return string
      */
-    protected function image(string $rule, string $field) :string
+    protected function image(string $rule, string $field, string $fieldName) :string
     {
         $validation = ImageRule::validate($rule, $field);
 
@@ -189,7 +189,7 @@ class Validator extends RulesValidator
             );
         }
 
-        return $this->contentBag->recording($validation);
+        return $this->contentBag->recording($validation, $fieldName);
     }
 
     /**
@@ -200,7 +200,7 @@ class Validator extends RulesValidator
      * 
      * @return string
      */
-    protected function max(string $rule, string $field) :string
+    protected function max(string $rule, string $field, string $fieldName) :string
     {
         $validation = MaxValueRule::validate($rule, $field);
 
@@ -210,7 +210,7 @@ class Validator extends RulesValidator
             );
         }
 
-        return $this->contentBag->recording($validation);
+        return $this->contentBag->recording($validation, $fieldName);
     }
 
     /**
@@ -221,7 +221,7 @@ class Validator extends RulesValidator
      * 
      * @return string
      */
-    protected function min(string $rule, string $field) :string
+    protected function min(string $rule, string $field, string $fieldName) :string
     {
         $validation = MinValueRule::validate($rule, $field);
 
@@ -231,7 +231,7 @@ class Validator extends RulesValidator
             );
         }
 
-        return $this->contentBag->recording($validation);
+        return $this->contentBag->recording($validation, $fieldName);
     }
 
     /**
@@ -244,7 +244,7 @@ class Validator extends RulesValidator
      * 
      * @return string
      */
-    protected function smallStr(string $rule, string $field) :string
+    protected function smallStr(string $rule, string $field, string $fieldName) :string
     {
         $validation = SmallStringRule::validate($rule, $field);
 
@@ -254,7 +254,7 @@ class Validator extends RulesValidator
             );
         }
 
-        return $this->contentBag->recording($validation);
+        return $this->contentBag->recording($validation, $fieldName);
     }
 
     /**
@@ -267,7 +267,7 @@ class Validator extends RulesValidator
      * 
      * @return string
      */
-    protected function text(string $rule, string $field) :string
+    protected function text(string $rule, string $field, string $fieldName) :string
     {
         $validation = TextRule::validate($rule, $field);
 
@@ -277,6 +277,6 @@ class Validator extends RulesValidator
             );
         }
 
-        return $this->contentBag->recording($validation);
+        return $this->contentBag->recording($validation, $fieldName);
     } 
 }

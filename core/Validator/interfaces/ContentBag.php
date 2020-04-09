@@ -11,7 +11,7 @@ interface ContentBag
      * 
      * @return array
      */ 
-    public function recording(string $message);
+    public function recording(string $message, $field = []);
 
     /**
      * Get all recorded messages 

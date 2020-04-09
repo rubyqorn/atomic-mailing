@@ -17,12 +17,13 @@ class ValidatedContentBag implements ContentBag
      * Record message into messages array
      * 
      * @param string $message 
+     * @param mixed $field
      * 
      * @return array
      */ 
-    public function recording(string $message)
+    public function recording(string $message, $field = [])
     {
-        return $this->messages[] = $message;
+        return $this->messages[$field] = $message;
     }
 
     /**
