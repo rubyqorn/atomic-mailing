@@ -9,7 +9,9 @@
             "email": "example@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "rubyqorn/db-manipulator": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "Atomic\\Core\\": "core/",
