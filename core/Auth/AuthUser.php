@@ -2,7 +2,7 @@
 
 namespace Atomic\Core\Auth;
 
-class AuthUser extends AuthEntity
+class AuthUser extends UserContainer
 {
     //
 }
