@@ -17,11 +17,9 @@ class LoginAction implements Process
     /**
      * Get instance of LoginRequestProcessor
      * 
-     * @param \Atomic\Core\Auth\Interfaces\RequestProcessing $processor
-     * 
      * @return \Atomic\Core\Auth\Interfaces\RequestProcessing
      */ 
-    public function getProcessor(RequestProcessing $processor) :RequestProcessing
+    public function getProcessor() :RequestProcessing
     {
         return new LoginRequestProcessor();
     }

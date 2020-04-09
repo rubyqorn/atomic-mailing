@@ -17,11 +17,9 @@ class RegisterAction implements Process
     /**
      * Get instance of RegisterRequestProcessor
      * 
-     * @param \Atomic\Core\Auth\Interfaces\RequestProcessing $processor
-     * 
      * @return \Atomic\Core\Auth\Interfaces\RequestProcessing
      */ 
-    public function getProcessor(RequestProcessing $processor) :RequestProcessing
+    public function getProcessor() :RequestProcessing
     {
         return new RegisterRequestProcessor();
     }

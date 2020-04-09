@@ -7,9 +7,7 @@ interface Process
     /**
      * Return instance of RequestProcessor classes
      * 
-     * @param \Atomic\Core\Auth\Interfaces\RequestProcessor $processor
-     * 
      * @return \Atomic\Core\Auth\Interfaces\RequestProcessor 
      */ 
-    public function getProcessor(RequestProcessing $processor) :RequestProcessing; 
+    public function getProcessor() :RequestProcessing; 
 }
