@@ -3,7 +3,7 @@
 namespace Atomic\Core\Auth\Register;
 
 use Atomic\Core\Auth\Interfaces\RequestProcessing;
-use Atomic\Core\Request\Request;
+use Atomic\Core\Http\Request\Request;
 
 class RegisterRequestProcessor implements RequestProcessing
 { 
