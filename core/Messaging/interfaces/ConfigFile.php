@@ -10,17 +10,19 @@ interface ConfigFile
     public function __construct(string $configFile);
 
     /**
+     * @param string $file
      * @return bool
      */ 
-    public function exists();
+    public function exists(string $file);
 
     /**
+     * @param string $file 
      * @return array
      */ 
-    public function getSettings();
+    public function parseSettings(string $file) :array;
 
     /**
      * @return void
      */ 
-    public function setConfigSettings();
+    public function setSettings();
 }
