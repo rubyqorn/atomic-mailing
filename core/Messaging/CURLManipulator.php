@@ -2,7 +2,9 @@
 
 namespace Atomic\Core\Messaging;
 
-class CURLManipulator
+use Atomic\Core\Messaging\Interfaces\ResourceManipulator;
+
+class CURLManipulator implements ResourceManipulator
 {
     /**
      * CURL resource
@@ -25,9 +27,28 @@ class CURLManipulator
      */ 
     protected array $content = [];
 
-    public function __construct(string $host)
+    /**
+     * Set CURL resource 
+     * 
+     * @param string $resource 
+     * 
+     * @return resource
+     */ 
+    public function setResource($resource)
     {
-        $this->curl = curl_init($host);
+        return $this->curl = curl_init($resource);
+    }
+
+    /**
+     * Get CURL resource
+     * 
+     * @param string $resource (Name of property - curl)
+     * 
+     * @return resource
+     */ 
+    public function getResource($resource)
+    {
+        return $this->$resource;
     }
 
     /**
@@ -40,7 +61,7 @@ class CURLManipulator
     public function setOptions(array $options)
     {
         foreach($options as $key => $option) {
-            $this->options[$key] = curl_setopt($this->curl, $option['name'], $option['value']);
+            $this->options[$key] = curl_setopt($this->getResource('curl'), $option['name'], $option['value']);
         }
 
         return $this->options;
@@ -53,8 +74,8 @@ class CURLManipulator
      */ 
     public function execute()
     {
-        $this->content['errors'] = curl_error($this->curl);
-        $this->content['response'] = curl_exec($this->curl);
+        $this->content['errors'] = curl_error($this->getResource('curl'));
+        $this->content['response'] = curl_exec($this->getResource('curl'));
 
         if (!empty($this->content['errors'])) {
             return $this->content['errors'];
@@ -70,6 +91,6 @@ class CURLManipulator
      */ 
     public function close()
     {
-        return curl_close($this->curl);
+        return curl_close($this->getResource('curl'));
     }
 }
