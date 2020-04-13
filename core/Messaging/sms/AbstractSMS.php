@@ -4,14 +4,20 @@ namespace Atomic\Core\Messaging\SMS;
 
 use Atomic\Core\Messaging\Interfaces\Message;
 use Atomic\Core\Messaging\SMS\SMSSettings;
-use Twilio\Rest\Client;
+use Nexmo\Client\Credentials\Basic;
+use Nexmo\Client;
 
 abstract class AbstractSMS implements Message
 {
     /**
-     * @var \Twilio\Rest\Client|null
+     * @var \Nexmo\Client\Credentials\Basic|null
      */ 
-    private ?Client $twilio = null;
+    private ?Basic $nexmo = null;
+
+    /**
+     * @var \Nexmo\Client|null
+     */ 
+    private ?Client $client = null;
 
     /**
      * @var \Atomic\Core\Messaging\SMS\Config\SMSSettings|null
@@ -28,24 +34,39 @@ abstract class AbstractSMS implements Message
     public function send(array $sendInfo)
     {
         $this->settings = $sendInfo['settings'];
-        $this->twilio = $this->getTwilioClient(
-            $this->settings->get('SMS_ACCOUNT_ID'), 
-            $this->settings->get('SMS_API_KEY')
+        $this->nexmo = $this->getNexmoBasic(
+            $this->settings->get('SMS_API_KEY'),
+            $this->settings->get('SMS_API_SECRET')
         );
 
-        $message = $this->twilio->messages->create(
-            $sendInfo['to'], $sendInfo['message_content']
-        );
+        $this->client = $this->getNexmoClient($this->nexmo);
 
-        return $message;
+        return $this->client->message()->send([
+            'to' => $sendInfo['to'],
+            'from' => $sendInfo['from'],
+            'text' => $sendInfo['message']
+        ]);
     }
 
     /**
-     * @return \Twilio\Rest\Client
-     */ 
-    public function getTwilioClient(string $sid, string $token) :Client
+     * @param string $apiKey
+     * @param string $secret 
+     * 
+     * @return \Nexmo\Client\Credentials\Basic
+     */
+    protected function getNexmoBasic(string $apiKey, string $secret) :Basic
     {
-        return new Client($sid, $token);
+        return new Basic($apiKey, $secret);
+    }
+
+    /**
+     * @param \Nexmo\Client\Credentials\Basic $basic
+     * 
+     * @return \Nexmo\Client
+     */ 
+    protected function getNexmoClient(Basic $basic) :Client
+    {
+        return new Client($basic);
     }
 
     /**
