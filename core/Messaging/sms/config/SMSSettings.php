@@ -57,7 +57,8 @@ class SMSSettings extends SMSConfigContainer implements ConfigFile
 
         $settings[] = $this->set('SMS_API_KEY', $this->settings['SMS_API_KEY']);
         $settings[] = $this->set('SMS_API_HOST', $this->settings['SMS_API_HOST']);
-        $settings[] = $this->set('SMS_API_URL', $this->settings['SMS_API_URL']);
+        $settings[] = $this->set('SMS_ACCOUNT_ID', $this->settings['SMS_ACCOUNT_ID']);
+        $settings[] = $this->set('SMS_PHONE_NUMBER', $this->settings['SMS_PHONE_NUMBER']);
 
         return $settings;
     }

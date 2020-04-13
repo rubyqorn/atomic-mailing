@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "rubyqorn/db-manipulator": "^1.0"
+        "rubyqorn/db-manipulator": "^1.0",
+        "twilio/sdk": "^6.2"
     },
     "autoload": {
         "psr-4": {
