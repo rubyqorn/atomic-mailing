@@ -6,6 +6,7 @@ use Atomic\Core\Http\Request\Request;
 use Atomic\Core\Http\Response\Response;
 use Atomic\Core\Http\Interfaces\Http;
 use Atomic\Core\Auth\Authorization;
+use Atomic\Core\View\View;
 
 class Controller 
 {
@@ -23,6 +24,11 @@ class Controller
      * @var \Atomic\Core\Auth\AuthEntity|null
      */ 
     protected ?Authorization $auth = null;
+
+    /**
+     * @var \Atomic\Core\View\View|null
+     */ 
+    protected ?View $view = null;
 
     /**
      * Server settings which contains
@@ -46,6 +52,7 @@ class Controller
         $this->request = new Request("{$this->host}{$_SERVER['REQUEST_URI']}");
         $this->response = new Response("{$this->host}{$this->request->currentUri()}");
         $this->auth = new Authorization($this->request, $this->response);
+        $this->view = new View();
     }
 
     /**

@@ -6,8 +6,16 @@ use Atomic\Core\View\Interfaces\ViewValidator;
 
 class Validator implements ViewValidator
 {
+    /**
+     * @var string
+     */ 
     protected string $file;
 
+    /**
+     * Base directory where contains all views
+     * 
+     * @var string
+     */ 
     public const BASE_DIR = '../views/';
 
     public function __construct(string $file)
@@ -15,6 +23,11 @@ class Validator implements ViewValidator
         $this->file = self::BASE_DIR . $file . '.php';
     }
 
+    /**
+     * Check if view exists
+     * 
+     * @return bool
+     */ 
     public function validateFileExistence()
     {
         if (file_exists($this->file)) {
@@ -22,6 +35,11 @@ class Validator implements ViewValidator
         }
     }
 
+    /**
+     * Check file extension
+     * 
+     * @return bool
+     */ 
     public function validateExtension()
     {
         $parsedFile = explode('.', $this->file);
@@ -31,6 +49,11 @@ class Validator implements ViewValidator
         }
     }
 
+    /**
+     * Validate file is file
+     * 
+     * @return bool
+     */ 
     public function isFileEntity()
     {
         if (filetype($this->file) == 'file') {

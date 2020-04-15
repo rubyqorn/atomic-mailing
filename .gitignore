@@ -2,3 +2,5 @@ logs/
 /vendor/
 env.ini
 /configuration/settings.php
+email-notification.txt
+composer.lock
