@@ -7,7 +7,7 @@
 # file you can set a "json" or "yaml" extension
 
 $extension = [
-    "extension_name" => "json"
+    "extension_name" => "yml"
 ];
 
 # Route parameters which will be use for flexible route

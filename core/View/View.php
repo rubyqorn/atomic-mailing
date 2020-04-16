@@ -3,6 +3,7 @@
 namespace Atomic\Core\View;
 
 use Atomic\Core\View\Validator\Validator;
+use Atomic\Core\View\Interfaces\ViewValidator;
 use Atomic\Core\Exceptions\FileException;
 
 class View

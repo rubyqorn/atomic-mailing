@@ -75,7 +75,7 @@ class UserInfoValidator implements UserManipulations
     public function pushUserDataInDatabase(array $userData)
     {
         $userData = array_values($userData);
-        return $this->user->insert()->into('email, password, name, login')
+        return $this->user->insert()->into('login, email, password, name')
                                     ->values($userData)->push();
     }
 }
