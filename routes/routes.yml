@@ -1,4 +1,20 @@
 /home: 
   controller: "HomeController"
-  action: "showPage",
+  action: "showPage"
   method: "GET"
+/login:
+  controller: 'Auth\LoginController'
+  action: 'showForm'
+  method: 'GET'
+/auth:
+  controller: 'Auth\LoginController'
+  action: 'auth'
+  method: 'POST'
+/registration:
+  controller: 'Auth\RegisterController'
+  action: 'showForm'
+  method: 'GET'
+/register:
+  controller: 'Auth\RegisterController'
+  action: 'auth'
+  method: 'POST'

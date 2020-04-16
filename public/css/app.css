@@ -345,7 +345,20 @@
     animation: searchForm 0.4s ease-in normal forwards;
 }
 
+#status-message .active-alert {
+    animation: alertMesage 0.4s ease-in infinite forwards;
+}
+
 /* Keyframes */
+
+@keyframes alertMessage {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(300px);
+    }
+}
 
 @keyframes searchForm {
     from{

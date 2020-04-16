@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Oxanium&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="stylesheet" href="/public/css/app.css">
-    <title>Atomic Mailing</title>
-</head>
-<body>
-
-
+<?php require_once '../views/parts/header.php'; ?>
     <!-- Main content -->
     <main id="login-content">
         <div class="container">
@@ -32,17 +18,22 @@
 
                     <!-- Login form -->
                     <div class="col-lg-6 pt-4" id="login-form">
-                        <form action="/views/home.php" method="post" class="text-white" id="login">
+                        <form action="/auth" method="post" class="text-white" id="login">
                             <div class="form-group mt-4 mb-4">
-                                <input type="text" name="login" class="form-control text-white" placeholder="Login">
+                                <input type="email" name="login" class="form-control text-white" placeholder="Email">
                             </div>
                             <div class="form-group mt-4 mb-4">
                                 <input type="password" class="form-control text-white" placeholder="Password" name="password">
                                 <div class="custom-control custom-checkbox mt-2">
                                     <input type="checkbox" class="custom-control-input" id="show-password">
                                     <label for="show-password" class="custom-control-label">
-                                        Show password
+                                        Show password |
                                     </label>
+                                    <a href="/forgot" class="text-white">
+                                        <small>
+                                            Forgot password
+                                        </small>
+                                    </a>
                                 </div>
                             </div>
                             <div class="from-group d-flex justify-content-between">
@@ -51,7 +42,7 @@
                                         Login
                                     </small>
                                 </button>
-                                <button type="submit" class="register-form-button text-uppercase">
+                                <button type="button" class="register-form-button text-uppercase">
                                     <small>
                                         Registration
                                     </small>
@@ -65,12 +56,9 @@
             </div>
 
         </div>
+
+        <?php require_once '../views/parts/alert.php'; ?>
+
     </main>
     
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="/public/js/app.js"></script>
-</body>
-</html>
+<?php require_once '../views/parts/footer.php'; ?>
