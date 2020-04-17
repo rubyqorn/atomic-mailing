@@ -20,7 +20,7 @@
                     <div class="col-lg-6 pt-4" id="login-form">
                         <form action="/auth" method="post" class="text-white" id="login">
                             <div class="form-group mt-4 mb-4">
-                                <input type="email" name="login" class="form-control text-white" placeholder="Email">
+                                <input type="email" name="email" class="form-control text-white" placeholder="Email">
                             </div>
                             <div class="form-group mt-4 mb-4">
                                 <input type="password" class="form-control text-white" placeholder="Password" name="password">

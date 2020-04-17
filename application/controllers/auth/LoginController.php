@@ -29,15 +29,16 @@ class LoginController extends Controller implements Auth
             'password' => 'min-val|6'
         ]);
 
-        if (!$message === 'Wrong email or password') {
-            return $this->login->setCookies(
-                $this->response,
-                'loged-in',
-                $this->request->post('email'),
-                time() + 86400
-            );
+        if ($message === 'Wrong email or password') {
+            return $message;
         }
 
-        echo $message;
+        $this->login->login($this->request)->makeCookies(
+            $this->response, 'loged_in', 
+            $this->request->post('email'), 
+            time() + 86400
+        );
+
+        return $this->response->setHeaders('Location', '/home');
     }
 }

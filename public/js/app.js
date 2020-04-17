@@ -15,32 +15,6 @@ $(document).ready(function () {
         $('#login-form').load('login #login-form #login');
     })
 
-    //Activate spinner loader when click at login button
-    $('#login-form .login-button').click(function (event) {
-        event.preventDefault();
-        $('#left-side-login .fa-atom').addClass('cir');
-
-        $.ajax({
-            url: '/auth',
-            method: 'POST',
-            data: {
-                email: $('#login-form input[name="login"]').val(),
-                password: $('#login-form input[type="password"]').val()
-            }
-        }).done((data) => {
-            if (typeof data === 'string' && data === 'Wrong email or password') {
-                $('#login-content #status-message').append(data);
-                $('#login-content #status-message').removeClass('d-none');
-                return $('#login-content #status-message').addClass('active-alert text-white');
-            }
-
-            setTimeout(() => {
-                window.location.href = '/home'
-            }, 2000);
-
-        });
-    });
-
     // Activate spinner loader when click at register button
     $('#login-form #register .register-button').click(function (event) {
         event.preventDefault();
