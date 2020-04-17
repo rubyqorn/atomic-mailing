@@ -180,6 +180,18 @@ class Request implements Http
     }
 
     /**
+     * Global var $_SERVER
+     * 
+     * @param string $settings 
+     * 
+     * @return mixed
+     */ 
+    public function server($settings = []) 
+    {
+        return $this->server[$settings];
+    }
+
+    /**
      * Get exists session value
      * 
      * @param string $sessionName 

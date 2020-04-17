@@ -19,6 +19,11 @@ class LoginController extends Controller implements Auth
         return $this->view->generate('auth/auth');
     }
 
+    /**
+     * User authorization 
+     * 
+     * @return void
+     */ 
     public function auth()
     {
         $this->ajaxData = AjaxController::getData($this->request);
@@ -30,7 +35,7 @@ class LoginController extends Controller implements Auth
         ]);
 
         if ($message === 'Wrong email or password') {
-            return $message;
+            return $this->response->redirect($this->request->server('HTTP_REFERER'));
         }
 
         $this->login->login($this->request)->makeCookies(

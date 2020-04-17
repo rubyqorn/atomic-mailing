@@ -128,4 +128,16 @@ class Response implements Http
             $path, $domain, $secure, $httpOnly
         );
     }
+
+    /**
+     * Redierect user
+     * 
+     * @param string 
+     * 
+     * @return void
+     */ 
+    public function redirect(string $host)
+    {
+        $this->setHeaders('Location', $host);
+    }
 }
