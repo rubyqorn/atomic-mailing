@@ -18,3 +18,15 @@
   controller: 'Auth\RegisterController'
   action: 'auth'
   method: 'POST'
+/forgot:
+  controller: 'Auth\ForgotPasswordController'
+  action: 'showForm'
+  method: 'GET'
+/confirmation:
+  controller: 'Auth\ForgotPasswordController'
+  action: 'confirmation'
+  method: 'POST'
+/code_confirmation:
+  controller: 'Auth\ForgotPasswordController'
+  action: 'codeConfirmation'
+  method: 'POST'

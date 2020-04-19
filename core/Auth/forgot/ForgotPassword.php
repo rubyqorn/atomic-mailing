@@ -65,11 +65,11 @@ class ForgotPassword
             return $this->writeStatusMessages(new ErrorBag, $this->validate());
         }
 
-        if (!$password === $confirmation) {
-            return $this->writeStatusMessages(new ErrorBag, 'Password mismatch');
+        if (strcmp($password, $confirmation) === 0) {
+            return true;
         }
 
-        return true;
+        return $this->writeStatusMessages(new ErrorBag, 'Password mismatch', 'password');
     }
 
     /**
@@ -77,39 +77,43 @@ class ForgotPassword
      * to type in the field
      * 
      * @param \Atomic\Core\Http\Request\Request $request 
+     * @param string $code
      * 
      * @return void
      */ 
-    public function sendCode(Request $request)
+    public function sendCode(Request $request, string $code)
     {
-        $this->request = $request;
-        $this->code = rand(100000, 999999);
-
         $this->confirmCode = new ConfirmationCode();
         return $this->confirmCode->send(
             $request, 
             "Forgot password", 
-            "This is you confirmation code: {$this->code}. Please type in the field"
+            "This is you confirmation code: {$code}. Please type in the field"
         );
     }
 
     /**
      * Compare two passwords and return message
      * 
+     * @param string $clientCode
+     * @param string $codeFromEmail
+     * @param string $field 
+     * 
      * @return \Atomic\Core\Validator\Interfaces\ContentBag
      */ 
-    public function codeConfirmation()
+    public function codeConfirmation(string $clientCode, string $codeFromEmail, string $field)
     {
-        if ($this->request->post('code') == $this->code) {
+        if ($clientCode == $codeFromEmail) {
             return $this->writeStatusMessages(
                 new ValidatedContentBag(), 
-                'Your password was changed'
+                'Your password was changed',
+                $field
             );
         }
 
         return $this->writeStatusMessages(
             new ErrorBag(), 
-            'Wrong code. Please check your email'
+            'Wrong code. Please check your email',
+            $field
         );
     }
 
@@ -118,13 +122,14 @@ class ForgotPassword
      * 
      * @param \Atomic\Core\Validator\Interfaces\ContentBag $bag 
      * @param string $message 
+     * @param string $field
      * 
      * @return \Atomic\Core\Validator\Interfaces\ContentBag
      */ 
-    protected function writeStatusMessages(ContentBag $bag, string $message)
+    protected function writeStatusMessages(ContentBag $bag, string $message, $field = [])
     {
         $this->statusMessages = $bag;
-        $this->statusMessages->recording('Password mismatch');
+        $this->statusMessages->recording($message, $field);
         return $this->statusMessages;
     }
 }

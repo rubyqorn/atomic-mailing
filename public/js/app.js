@@ -53,6 +53,74 @@ $(document).ready(function () {
 
     });
 
+    // Forgot password form
+    $(document).ready(function() {
+        // Generate code and pass into hidden field 
+        let code = Math.floor(Math.floor(999999) * Math.random());
+        $('#forgot input[type="hidden"]').attr('value', code);
+
+
+        // By click we send POST request where validate password 
+        // field and send email 
+        $('#forgot #password_confirm').click(function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: '/confirmation',
+                method: 'POST',
+                data: {
+                    code: $('#forgot input[name="code"]').val(),
+                    email: $('#forgot input[name="email"]').val(),
+                    password: $('#forgot input[name="password"]').val(),
+                    confirmation: $('#forgot input[name="confirmation"]').val(),
+                }
+            }).done(function(data) {
+                if (data === 'Password mismatch') {
+                    $('#forgot #message').removeClass('d-none');
+                    return $('#forgot #message small').append(data);
+                }
+
+                $('#forgot #message').addClass('d-none');
+                $('#forgot #code').removeClass('d-none').addClass('d-flex');
+                $('#forgot #password_confirm').addClass('d-none');
+                $('#forgot #code_confirm').removeClass('d-none');
+            })
+        });
+
+        // By click validate typed code from user whom 
+        // have come at email message with code. And finally 
+        // update user password in database
+        $('#forgot #code_confirm').click(function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: '/code_confirmation',
+                method: 'POST',
+                data: {
+                    code: $('#forgot input[name="code"]').val(),
+                    email: $('#forgot input[name="email"]').val(),
+                    password: $('#forgot input[name="password"]').val(),
+                    confirmation: $('#forgot input[name="confirmation"]').val(),
+                    code_confirm: $('#forgot input[name="code_confirm"]').val()
+                }
+            }).done(function(data) {
+                console.log(data);
+                if (data === 'Wrong code. Please check your email') {
+                    $('#forgot #message').removeClass('d-none');
+                    return $('#forgot #message small').append(data);
+                }
+
+                return setTimeout(function(data) {
+                    $('#forgot #message').removeClass('d-none');
+                    $('#forgot #message p').removeClass('text-danger').addClass('text-success');
+                    $('#forgot #message small').append(data);
+
+                    return window.location.href = '/login';
+                }, 2000);
+            });
+        });
+    });
+
     // Show message form and add active class for dialog 
     $('#home-content #dialogs #dialog').click(function () {
         // Add active class for dialog
