@@ -107,7 +107,7 @@ class ForgotPasswordController extends Controller
         // Create password hash and push in 
         // database by mail property
         $hashedPassword = $this->hasher->manipulate($this->ajaxData['confirmation']);
-        $userUpdateProcess = $this->user->update()->set('password', [$hashedPassword])
+        $userUpdateProcess = $this->user->update()->set('password = ?', [$hashedPassword])
                                         ->where("email = '{$this->ajaxData['email']}'")
                                         ->push();
 
