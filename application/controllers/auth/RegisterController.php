@@ -21,6 +21,11 @@ class RegisterController extends Controller implements Auth
     /**
      * @var string
      */ 
+    protected string $title = 'Registration';
+
+    /**
+     * @var string
+     */ 
     protected string $message = 'Your account was registered, check your email';
 
     /**
@@ -63,7 +68,13 @@ class RegisterController extends Controller implements Auth
      */ 
     public function showForm()
     {
-        return $this->view->generate('auth/register');
+        if (CookieController::check('loged_in', 'home')) {
+            return $this->response->redirect('/home');
+        }
+
+        return $this->view->generate('auth/register', [
+            'title' => $this->title
+        ]);
     }
 
     /**

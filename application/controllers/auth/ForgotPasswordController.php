@@ -6,6 +6,7 @@ use Atomic\Core\Auth\Forgot\ForgotPassword;
 use Atomic\Core\Auth\Hasher\Hasher;
 use Atomic\Application\Models\User;
 use Atomic\Application\Controllers\Controller;
+use Atomic\Application\Controllers\CookieController;
 use Atomic\Application\Controllers\Ajax\AjaxController;
 
 class ForgotPasswordController extends Controller 
@@ -27,6 +28,11 @@ class ForgotPasswordController extends Controller
      */ 
     protected array $ajaxData = [];
 
+    /**
+     * @var string
+     */ 
+    protected string $title = 'Reset password';
+
     public function __construct()
     {
         $this->password = new ForgotPassword();
@@ -38,7 +44,14 @@ class ForgotPasswordController extends Controller
      */ 
     public function showForm()
     {
-        return $this->view->generate('auth/forgot/forgot');
+        if (CookieController::check('loged_in', 'home')) {
+           return $this->response->redirect('home'); 
+        }
+
+        return $this->view->generate('auth/forgot/forgot', [
+            'title' => $this->title
+        ]);
+
     }
 
     /**

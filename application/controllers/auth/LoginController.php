@@ -9,14 +9,28 @@ use Atomic\Core\Auth\Authorization;
 
 class LoginController extends Controller implements Auth
 {
+    /**
+     * @var array
+     */ 
     protected array $ajaxData = [];
+
+    /**
+     * @var string
+     */ 
+    protected string $title = 'Login';
 
     /**
      * @return void
      */ 
     public function showForm()
     {
-        return $this->view->generate('auth/auth');
+        if (CookieController::check('loged_in', 'home')) {
+            return $this->response->redirect('/home');
+        }
+
+        return $this->view->generate('auth/auth', [
+            'title' => $this->title
+        ]);
     }
 
     /**
