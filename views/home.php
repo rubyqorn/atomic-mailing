@@ -23,24 +23,34 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item d-flex">
-                <img src="/public/img/default-avatar.png" alt="">
-                <div class="dropdown">
-                    <a role="button" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" id="menu">
-                        John Doe
-                    </a>
-                    <div class="dropdown-menu">
-                        <div class="d-flex dropdown-item">
-                            <i class="fas fa-user mt-1 mr-2 text-muted"></i>
-                            <a href="settings.php" class="text-muted link">Settings</a>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <i class="fa fa-cog text-muted mt-1 mr-2"></i>
-                            <a href="account.php" class="text-muted link">Account</a>
+
+            <?php foreach($user as $user): ?>
+
+                <li class="nav-item d-flex">
+                    <img src="<?php echo $user['img']; ?>" alt="">
+                    <div class="dropdown">
+                        <a role="button" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" id="menu">
+                            <?php echo $user['name']; ?>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="d-flex dropdown-item">
+                                <i class="fa fa-sign-out-alt text-muted mt-1 mr-2"></i>
+                                <a href="/logout" class="text-muted">Logout</a>
+                            </div>
+                            <div class="d-flex dropdown-item">
+                                <i class="fas fa-user mt-1 mr-2 text-muted"></i>
+                                <a href="settings.php" class="text-muted link">Settings</a>
+                            </div>
+                            <div class="dropdown-item d-flex">
+                                <i class="fa fa-cog text-muted mt-1 mr-2"></i>
+                                <a href="account.php" class="text-muted link">Account</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
+                </li>
+
+            <?php endforeach; ?>
+
         </ul>
     </nav>
 

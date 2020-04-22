@@ -3,6 +3,7 @@
 namespace Atomic\Application\Controllers\Auth;
 
 use Atomic\Application\Controllers\Ajax\AjaxController;
+use Atomic\Application\Controllers\CookieController;
 use Atomic\Application\Controllers\Controller;
 use Atomic\Application\Controllers\Auth\Auth;
 use Atomic\Core\Messaging\Mail\MailMessage;
@@ -68,13 +69,13 @@ class RegisterController extends Controller implements Auth
      */ 
     public function showForm()
     {
-        if (CookieController::check('loged_in', 'home')) {
-            return $this->response->redirect('/home');
+        if (!CookieController::check('loged_in')) { 
+            return $this->view->generate('auth/register', [
+                'title' => $this->title
+            ]);
         }
 
-        return $this->view->generate('auth/register', [
-            'title' => $this->title
-        ]);
+        return $this->response->redirect('/home');
     }
 
     /**

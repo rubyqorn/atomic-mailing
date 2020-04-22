@@ -2,17 +2,13 @@
 
 namespace Atomic\Application\Controllers\Auth;
 
-use Atomic\Application\Controllers\Ajax\AjaxController;
+use Atomic\Application\Controllers\CookieController;
 use Atomic\Application\Controllers\Controller;
 use Atomic\Application\Controllers\Auth\Auth;
 use Atomic\Core\Auth\Authorization;
 
 class LoginController extends Controller implements Auth
 {
-    /**
-     * @var array
-     */ 
-    protected array $ajaxData = [];
 
     /**
      * @var string
@@ -24,10 +20,6 @@ class LoginController extends Controller implements Auth
      */ 
     public function showForm()
     {
-        if (CookieController::check('loged_in', 'home')) {
-            return $this->response->redirect('/home');
-        }
-
         return $this->view->generate('auth/auth', [
             'title' => $this->title
         ]);
@@ -40,7 +32,6 @@ class LoginController extends Controller implements Auth
      */ 
     public function auth()
     {
-        $this->ajaxData = AjaxController::getData($this->request);
         $this->login = new Authorization($this->request, $this->response);
 
         $message = $this->login->login($this->request)->handle([
