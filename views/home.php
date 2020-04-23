@@ -62,62 +62,22 @@
                 <!-- Dialogs -->
                 <div class="col-lg-5 p-0" id="dialogs">
 
-                    <div class="col-lg-12 p-4 m-0 d-flex dialog-1" id="dialog">
-                        <div class="col-lg-2">
-                            <img src="/public/img/default-avatar.png" alt="" class="w-100">
+                    <?php foreach($messages as $message): ?>
+                        <div class="col-lg-12 p-4 m-0 d-flex dialog-<?php echo $message['id']?>" id="dialog">
+                            <div class="col-lg-2">
+                                <img src="<?php echo $message['img'] ?>" alt="" class="w-100">
+                            </div>
+                            <div class="col-lg-10 text-left">
+                                <p class="text-muted title mb-0">
+                                    <?php echo $message['name']; ?>
+                                </p>
+                                <p class="text-muted preview-text font-weight-bold">
+                                    <?php echo $message['message']; ?>
+                                </p>
+                            </div>
                         </div>
-                        <div class="col-lg-10 text-left">
-                            <p class="text-muted title mb-0">
-                                New york times
-                            </p>
-                            <p class="text-muted preview-text font-weight-bold">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque, assumenda...
-                            </p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
 
-                    <div class="col-lg-12 p-4 m-0 d-flex dialog-2" id="dialog">
-                        <div class="col-lg-2">
-                            <img src="/public/img/default-avatar.png" alt="" class="w-100">
-                        </div>
-                        <div class="col-lg-10 text-left">
-                            <p class="text-muted title mb-0">
-                                New york times
-                            </p>
-                            <p class="text-muted preview-text font-weight-bold">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque, assumenda...
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 p-4 m-0 d-flex dialog-3" id="dialog">
-                        <div class="col-lg-2">
-                            <img src="/public/img/default-avatar.png" alt="" class="w-100">
-                        </div>
-                        <div class="col-lg-10 text-left">
-                            <p class="text-muted title mb-0">
-                                New york times
-                            </p>
-                            <p class="text-muted preview-text font-weight-bold">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque, assumenda...
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 p-4 m-0 d-flex dialog-4" id="dialog">
-                        <div class="col-lg-2">
-                            <img src="/public/img/default-avatar.png" alt="" class="w-100">
-                        </div>
-                        <div class="col-lg-10 text-left">
-                            <p class="text-muted title mb-0">
-                                New york times
-                            </p>
-                            <p class="text-muted preview-text font-weight-bold">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque, assumenda...
-                            </p>
-                        </div>
-                    </div>
-                    
                 </div>
 
                 <!-- Message content -->

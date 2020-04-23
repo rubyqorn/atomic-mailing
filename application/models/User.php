@@ -15,7 +15,7 @@ class User extends Model
      */ 
     public function authUser(string $email)
     {
-        return $this->select()->columns('name, img')
+        return $this->select()->columns('name, img, id')
                     ->where(" email = '{$email}' ")
                     ->get();
     }
