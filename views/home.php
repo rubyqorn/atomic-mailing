@@ -39,11 +39,11 @@
                             </div>
                             <div class="d-flex dropdown-item">
                                 <i class="fas fa-user mt-1 mr-2 text-muted"></i>
-                                <a href="settings.php" class="text-muted link">Settings</a>
+                                <a href="/settings" class="text-muted link">Settings</a>
                             </div>
                             <div class="dropdown-item d-flex">
                                 <i class="fa fa-cog text-muted mt-1 mr-2"></i>
-                                <a href="account.php" class="text-muted link">Account</a>
+                                <a href="/account" class="text-muted link">Account</a>
                             </div>
                         </div>
                     </div>

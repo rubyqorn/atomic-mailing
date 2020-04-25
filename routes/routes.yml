@@ -30,3 +30,11 @@
   controller: 'Auth\ForgotPasswordController'
   action: 'codeConfirmation'
   method: 'POST'
+/settings:
+  controller: 'SettingsController'
+  action: 'show'
+  method: 'GET'
+/account:
+  controller: 'AccountController'
+  action: 'show'
+  method: 'GET'
