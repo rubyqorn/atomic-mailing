@@ -16,7 +16,7 @@ class Website extends Model
      */ 
     public function userWebsites(string $email) 
     {
-        return $this->select()->columns('id, twitter, vk, discord')
+        return $this->select()->columns('twitter, vk, discordapp')
                             ->where(" user_email = '{$email}' ")
                             ->get();
     }

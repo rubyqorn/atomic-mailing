@@ -38,3 +38,11 @@
   controller: 'AccountController'
   action: 'show'
   method: 'GET'
+/edit-account:
+  controller: 'AccountController'
+  action: 'updateDefaultInfo'
+  method: 'POST'
+/update-social-links:
+  controller: 'AccountController'
+  action: 'updateSocialLinks'
+  method: 'POST'

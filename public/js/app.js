@@ -212,14 +212,71 @@ $(document).ready(function () {
     $('#account #default-info .save-edits').click(function (event) {
         event.preventDefault();
 
-        $(this).find('small').remove();
-        $(this).append('<div class="spinner-border spinner-border-sm" role="status"></div>');
+        $.ajax({
+            url: "/edit-account",
+            method: "POST",
+            data: {
+                name: $('#account #default-info input[name="name"]').val(),
+                website: $('#account #default-info input[name="website"]').val(),
+                email: $('#account #default-info input[name="email"]').val()
+            } 
+        }).done(function(data) {
+            if (data === 'Processing error') {
+                $('#account #default #message').removeClass('d-none');
+                return $('#account #default-info #message .text-white').append(data);
+            }
+
+            $('#account #default #message').addClass('d-none');
+
+            return setTimeout(function() {
+                window.location.href = "/account";
+            }, 2000);
+        })
+        
     });
 
     // Show buttons which call modal windows by clicking
     $('#account #social-links .edit-button').click(function () {
+        // Show edit buttons
         $(this).addClass('active-tab');
-        $('#account #social-links i[role="button"]').toggleClass('d-none');
+        let penButton = $('#account #social-links i[role="button"]').toggleClass('d-none');
+        
+        $(penButton).click(function() {
+            // Get target name and set active class for modal window
+            let targetName = $(this).attr('data-target');
+            $('#account .modal').removeClass('active-modal');
+            $('#account '+ targetName).addClass('active-modal');
+
+            // Ajax request processing
+            $('#account .active-modal button[type="submit"]').click(function(event) {
+                event.preventDefault();
+
+                // Field name where we will get typed data
+                let fieldName = $('#account .active-modal').attr('id');
+                fieldName = fieldName.split('-')['2'];
+
+                $.ajax({
+                    url: "/update-social-links",
+                    method: "POST",
+                    data: {
+                        website: $('#account .active-modal input[name="'+ fieldName +'"]').val()
+                    }
+                }).done(function(data) {
+                    // Show error message if user type wrong link
+                    if (data == 'Website is not exists') {
+                         $('#account .active-modal #message').removeClass('d-none');
+                         return $('#account .active-modal #message strong').append(data);
+                    }
+                    
+                    // Redirect user at account page
+                    $('#account .active-modal #message').addClass('d-none');
+                    setTimeout(function() {
+                        window.location.href = "/account";
+                    }, 2000);
+                })
+
+            });
+        })
     });
 
     $('#home-nav i.fa-search').click(function () {
