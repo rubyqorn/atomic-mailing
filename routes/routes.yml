@@ -46,3 +46,7 @@
   controller: 'AccountController'
   action: 'updateSocialLinks'
   method: 'POST'
+/update-user-settings:
+  controller: 'SettingsController'
+  action: 'updateSettings'
+  method: 'POST'

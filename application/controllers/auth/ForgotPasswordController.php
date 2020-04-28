@@ -72,7 +72,6 @@ class ForgotPasswordController extends Controller
         );
 
         if ($confirmation === true) {
-            print_r($this->ajaxData);
             return $this->sendCode($this->ajaxData);
         }
 

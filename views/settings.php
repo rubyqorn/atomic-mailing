@@ -37,10 +37,10 @@
                                     </div>
                                 <?php endif; ?>
 
-                                <?php if($websites['0']['discord'] !== null): ?>
+                                <?php if($websites['0']['discordapp'] !== null): ?>
                                     <div class="col mt-2 d-flex">
                                         <i class="fab fa-discord text-black mt-1 mr-3"></i>
-                                        <a href="<?php echo $websites['0']['discord']; ?>" class="text-white font-weight-bold">
+                                        <a href="<?php echo $websites['0']['discordapp']; ?>" class="text-white font-weight-bold">
                                             <small>
                                                 Discord
                                             </small> 
@@ -70,7 +70,7 @@
                                             Email
                                         </small>
                                     </label>
-                                    <input type="email" name="email" class="field" placeholder="example@mail.com" value="<?php echo $item['email']; ?>" required>
+                                    <input type="email" name="email" class="field" placeholder="example@mail.com" value="<?php echo $item['email']; ?>" readonly>
                                 </div>
                                 <div class="form-group border p-1">
                                     <label for="website" class="control-label text-muted text-uppercase">
@@ -80,6 +80,9 @@
                                     </label>
                                     <input type="text" class="field" name="website" value="<?php !$item['website'] ?? '' ?>" placeholder="https://example.com">
                                 </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="code">
+                                </div>
                                 <div class="form-group border p-1">
                                     <label for="password" class="control-label text-uppercase text-muted">
                                         <small>
@@ -87,20 +90,39 @@
                                         </small>
                                     </label>
                                     <div class="d-flex">
-                                        <input type="password" name="password" class="field" placeholder="6 symbols required" required>
+                                        <input type="password" name="password" class="field" placeholder="6 symbols required">
                                         <i class="fas fa-eye text-muted mt-1 ml-1"></i>
                                     </div>
                                 </div>
-                                <div class="form-group border p-1">
+                                <div class="form-group border p-1" id="password-confirmation">
                                     <label for="confirmation" class="control-label text-muted text-uppercase">
                                         <small>
                                             Confirmation
                                         </small>
                                     </label>
-                                    <input type="password" name="confirmation" class="confirmation-field" required>
+                                    <input type="password" name="confirmation" class="confirmation-field">
+                                    <p class="text-danger d-none">
+                                        <small></small>
+                                    </p>
+                                </div>
+                                <div class="form-group border p-1 d-none" id="code">
+                                    <label for="confirmation" class="control-label text-muted text-uppercase">
+                                        <small>
+                                            Code
+                                        </small>
+                                    </label>
+                                    <input type="text" name="code_confirm" class="confirmation-field" required>
+                                    <p class="text-danger d-none">
+                                        <small></small>
+                                    </p>
                                 </div>
                                 <div class="form-group d-flex flex-row-reverse">
-                                    <button type="submit" class="save-settings text-black text-uppercase">
+                                    <button type="submit" id="password-confirm-btn" class="save-settings text-black text-uppercase">
+                                        <small>
+                                            Save
+                                        </small>
+                                    </button>
+                                    <button type="submit" id="code-confirm-btn" class="d-none btn btn-outline-danger text-uppercase">
                                         <small>
                                             Save
                                         </small>
