@@ -155,98 +155,32 @@ $(document).ready(function () {
         }, 1500);
 
     })
+    
+    // Update user settings 
+    $('#settings #user-settings-form #password-confirm-btn').click(function (event) {
+        event.preventDefault();
 
-    // Show password and confirmation fields
-    $('#settings #user-settings-form .fa-eye').click(function () {
-        let passwordField = $('#settings #user-settings-form input[name="password"]');
-        let confirmationField = $('#settings #user-settings-form input[name="confirmation"]');
+        $.ajax({
+            url: '/update-user-settings',
+            method: 'POST',
+            data: {
+                name: $('#user-settings-form input[name="name"]').val(),
+                email: $('#user-settings-form input[name="email"]').val(),
+                website: $('#user-settings-form input[name="website"]').val(),
+            }
+        }).done(function(data) {
+            if (data == 'Validation problem') {
+                $('#settings #error-message').removeClass('d-none');
+                return $('#settings #error-message small').append(data);
+            }
 
-        if ($(passwordField).attr('type') == 'password') {
-            $(passwordField).prop('type', 'text');
-            $(confirmationField).prop('type', 'text');
-        } else {
-            $(passwordField).prop('type', 'password');
-            $(confirmationField).prop('type', 'password');
-        }
-    });
-
-    $(document).ready(function() {
-        // Generate code for sending in user email
-        let code = Math.floor(Math.floor(999999) * Math.random());
-        $('#settings #user-settings-form input[name="code"]').attr('value', code);
-
-        // Password compare
-        $('#settings #user-settings-form #password-confirm-btn').click(function (event) {
-            event.preventDefault();
-
-            $.ajax({
-                url: '/update-user-settings',
-                method: 'POST',
-                data: {
-                    code: $('#user-settings-form input[name="code"]').val(),
-                    name: $('#user-settings-form input[name="name"]').val(),
-                    email: $('#user-settings-form input[name="email"]').val(),
-                    website: $('#user-settings-form input[name="website"]').val(),
-                    password: $('#user-settings-form input[name="password"]').val(),
-                    confirmation: $('#user-settings-form input[name="confirmation"]').val()
-                }
-            }).done(function(data) {
-                if (data !== 'Processing error') {
-                    return setTimeout(function() {
-                        window.location.href = "/home";
-                    }, 1500);
-                }
-
-                if (data == 'Processing error') {
-                    $('#user-settings-form #password-confirmation p.text-danger').removeClass('d-none');
-                    return $('#user-settings-form #password-confirmation p.text-danger small').append(data);
-                }
-                
-                //  If password mismatch or validation is wrong show error message
-                if (data == 'Password mismatch') {
-                    $('#user-settings-form #password-confirmation p.text-danger').removeClass('d-none');
-                    return $('#user-settings-form #password-confirmation p.text-danger small').append(data);
-                }
-
-                // Show code field where user have to pass your data
-                $('#user-settings-form #password-confirmation p.text-danger').addClass('d-none');
-                $('#user-settings-form #code').removeClass('d-none');
-                // Show code confirmation button 
-                $('#user-settings-form #password-confirm-btn').addClass('d-none');
-                $('#user-settings-form #code-confirm-btn').removeClass('d-none');
-            });
-
+            return setTimeout(function() {
+                window.location.href = '/settings';
+            }, 1000);
         });
 
-        // Code confirmation  
-        $('#settings #user-settings-form #code-confirm-btn').click(function(event) {
-            event.preventDefault();
-
-            $.ajax({
-                url: '/code_confirmation',
-                method: 'POST',
-                data: {
-                    email: $('#user-settings-form input[name="email"]').val(),
-                    code: $('#user-settings-form input[name="code"]').val(),
-                    code_confirm: $('#user-settings-form input[name="code_confirm"]').val(),
-                    confirmation: $('#user-settings-form input[name="confirmation"]').val(),
-                }
-            }).done(function(data) {
-                console.log(data);
-
-                // Show error message if data s wrong
-                if (data == 'Wrong code. Please check your email' || data == 'Email is not exists') {
-                    $('#user-settings-form #code p').removeClass('d-none');
-                    return $('#user-settings-form #code p.text-danger small').append(data);
-                }
-
-                // Redirect on home page
-                setTimeout(function() {
-                    window.location.href = '/home';
-                }, 1500);
-            })
-        })
     });
+
 
     // Make tab active and show content block
     $('#account #tabs .nav-item').click(function () {

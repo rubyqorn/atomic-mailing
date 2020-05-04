@@ -1,0 +1,53 @@
+<?php 
+
+namespace Atomic\Application\Controllers\Settings;
+
+use Atomic\Application\Controllers\SettingsController;
+use Atomic\Core\Http\Request\Request;
+use Atomic\Application\Models\User;
+
+class UserNameChangerController extends SettingsController implements Changer
+{
+    /**
+     * @var \Atomic\Application\Models\User|null
+     */ 
+    protected ?User $user = null;
+
+    /**
+     * Update user data
+     * 
+     * @param array $userSettings
+     * 
+     * @return void
+     */ 
+    public function update(array $userSettings)
+    {
+        $this->user = new User();
+        $userData = array_values($userSettings);
+        
+        return $this->user->update()->set('name = ?, email = ?', $userData)
+                    ->where(" email = '{$this->request->cookie('loged_in')}' ")
+                    ->push();
+    }
+
+    /**
+     * Validate request data using validation rules
+     * 
+     * @param \Atomic\Core\Http\Request\Request $request 
+     * 
+     * @return string|\Atomic\Application\Controllers\Settings\UserNameChangerController
+     */ 
+    public function validateRequest(Request $request)
+    {
+        $validation = $request->validator([
+            'name' => 'min-val|6',
+            'email' => 'email'
+        ]);
+
+        if (!$validation) {
+            return 'Validation problem';
+        }
+
+        return $this;
+    }   
+}

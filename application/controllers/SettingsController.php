@@ -3,7 +3,8 @@
 namespace Atomic\Application\Controllers;
 
 use Atomic\Application\Controllers\Ajax\AjaxController;
-use Atomic\Application\Controllers\Auth\ForgotPasswordController;
+use Atomic\Application\Controllers\Settings\UserNameChangerController;
+use Atomic\Application\Controllers\Settings\UserWebsiteChangerController;
 
 class SettingsController extends AbstractUserSettingsController 
 {
@@ -33,9 +34,14 @@ class SettingsController extends AbstractUserSettingsController
     protected array $ajaxData = [];
 
     /**
-     * @var \Atomic\Application\Controllers\Auth\ForgotPasswordController|null
-     */ 
-    protected ?ForgotPasswordController $password;
+    * @var \Atomic\Application\Controllers\Settings\UserWebsiteChangerController
+    */ 
+    protected $websiteChanger;
+
+    /**
+    * @var \Atomic\Application\Controllers\Settings\UserNameChangerController
+    */ 
+    protected $userNameChanger;
 
     /**
      * User settings 
@@ -64,67 +70,35 @@ class SettingsController extends AbstractUserSettingsController
     }
 
     /**
-     * Update user settings (password, name, website)
+     * Update user settings (name, website)
      * 
      * @return void
      */ 
     public function updateSettings()
     {
         $this->ajaxData = AjaxController::getData($this->request);
-        $this->password = new ForgotPasswordController();
-
-        if (!empty($this->ajaxData['password']) && !empty($this->ajaxData['confirmation'])) {
-            $confirmation = $this->password->confirmation();
-            $validation = $this->request->validator([
-                'name' => 'min-val|3',
-                'email' => 'email',
-                'password' => 'min-val|6',
-                'confirmation' => 'min-val|6'
-            ]);
-
-            if ($confirmation == 'Password mismatch') {
-                return print $confirmation;
-            }
-
-            return $confirmation;
-        }
 
         if (!empty($this->ajaxData['website'])) {
-            $validation = $this->request->validator([
-                'name' => 'min-val|3',
-                'email' => 'email',
-                'website' => 'small-string'
-            ]);
+            $this->websiteChanger = new UserWebsiteChangerController();
+            $validation = $this->websiteChanger->validateRequest($this->request);
 
-            if (!$validation) {
-                return print 'Processing error';
+            if ($validation == 'Validation problem') {
+                return print $validation;
             }
 
-            $userData = [
-                'name' => $this->ajaxData['name'],
-                'website' => $this->ajaxData['website']
-            ];
-            return $this->user->updateUserSettings($this->request, $userData);
+            return $validation->update($this->ajaxData);
         }
 
-        if (empty($this->ajaxData['website'])) {
-            $validation = $this->request->validator([
-                'name' => 'min-val|3',
-                'email' => 'email',
-            ]);
+        unset($this->ajaxData['website']);
 
-            if (!$validation) {
-                return print 'Processing error';
-            }
+        $this->userNameChanger = new UserNameChangerController();
+        $validation = $this->userNameChanger->validateRequest($this->request);
 
-            $userData = [
-                'name' => $this->ajaxData['name'],
-            ];
-            return $this->user->updateUserSettings($this->request, $userData);
+        if ($validation == 'Validation error') {
+            return print $validation;
         }
 
-
-        
+        return $validation->update($this->ajaxData);
     }
 
 }

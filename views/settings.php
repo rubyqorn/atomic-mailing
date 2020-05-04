@@ -78,41 +78,10 @@
                                             Website
                                         </small>
                                     </label>
-                                    <input type="text" class="field" name="website" value="<?php !$item['website'] ?? '' ?>" placeholder="https://example.com">
+                                    <input type="text" class="field" name="website" value="<?php echo !$item['website'] ? '' : $item['website'] ?>" placeholder="https://example.com">
                                 </div>
-                                <div class="form-group">
-                                    <input type="hidden" name="code">
-                                </div>
-                                <div class="form-group border p-1">
-                                    <label for="password" class="control-label text-uppercase text-muted">
-                                        <small>
-                                            Password
-                                        </small>
-                                    </label>
-                                    <div class="d-flex">
-                                        <input type="password" name="password" class="field" placeholder="6 symbols required">
-                                        <i class="fas fa-eye text-muted mt-1 ml-1"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group border p-1" id="password-confirmation">
-                                    <label for="confirmation" class="control-label text-muted text-uppercase">
-                                        <small>
-                                            Confirmation
-                                        </small>
-                                    </label>
-                                    <input type="password" name="confirmation" class="confirmation-field">
-                                    <p class="text-danger d-none">
-                                        <small></small>
-                                    </p>
-                                </div>
-                                <div class="form-group border p-1 d-none" id="code">
-                                    <label for="confirmation" class="control-label text-muted text-uppercase">
-                                        <small>
-                                            Code
-                                        </small>
-                                    </label>
-                                    <input type="text" name="code_confirm" class="confirmation-field" required>
-                                    <p class="text-danger d-none">
+                                <div class="col-lg-12 d-none" id="error-message">
+                                    <p class="text-danger">
                                         <small></small>
                                     </p>
                                 </div>
