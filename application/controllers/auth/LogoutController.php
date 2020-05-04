@@ -14,6 +14,11 @@ class LogoutController extends Controller
      */ 
     public function logout()
     {
-        //
+        if (CookieController::check('loged_in')) {
+            $this->response->setCookies('loged_in', '', time() - 3600);
+            return $this->response->redirect('/login');
+        }
+
+        return $this->response->redirect('/login');
     }
 }

@@ -18,6 +18,10 @@
   controller: 'Auth\RegisterController'
   action: 'auth'
   method: 'POST'
+/logout:
+  controller: 'Auth\LogoutController'
+  action: 'logout'
+  method: 'POST'
 /forgot:
   controller: 'Auth\ForgotPasswordController'
   action: 'showForm'
