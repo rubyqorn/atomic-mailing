@@ -18,7 +18,7 @@ class Message extends Model
     {
         return $this->select()->fromTwoTables(
             'users, messages',
-            'users.name, users.img, messages.message, messages.id',
+            'users.name, users.img, messages.message, messages.id, messages.dialog_id',
             "users.id = messages.who"
         )->and(" messages.whom = {$whom} ")->get();
     }

@@ -2,6 +2,10 @@
   controller: "HomeController"
   action: "showPage"
   method: "GET"
+/dialog/{id}:
+  controller: 'DialogsController'
+  action: 'dialog'
+  method: 'GET'
 /login:
   controller: 'Auth\LoginController'
   action: 'showForm'

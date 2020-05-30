@@ -123,6 +123,16 @@ $(document).ready(function () {
 
     // Show message form and add active class for dialog 
     $('#home-content #dialogs #dialog').click(function () {
+        let dialogClass = $(this).attr('class').split(' ')['4'];
+        let dialogId = dialogClass.split('-')['1'];
+
+        $.ajax({
+            url: '/dialog/' + dialogId,
+            method: 'GET',
+        }).done(function(data) {
+            $('#home-content #content').append(data);
+        });
+
         // Add active class for dialog
         $('#home-content #dialogs #dialog').removeClass('active-dialog');
         $(this).addClass('active-dialog');
@@ -133,6 +143,9 @@ $(document).ready(function () {
 
         // Show message form
         $('#message-form').addClass('show-message-form');
+
+        
+        
 
     });
 

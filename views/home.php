@@ -63,7 +63,7 @@
                 <div class="col-lg-5 p-0" id="dialogs">
 
                     <?php foreach($messages as $message): ?>
-                        <div class="col-lg-12 p-4 m-0 d-flex dialog-<?php echo $message['id']?>" id="dialog">
+                        <div class="col-lg-12 p-4 m-0 d-flex dialog-<?php echo $message['dialog_id']?>" id="dialog">
                             <div class="col-lg-2">
                                 <img src="<?php echo $message['img'] ?>" alt="" class="w-100">
                             </div>
@@ -82,51 +82,28 @@
 
                 <!-- Message content -->
                 <div class="col-lg-7 p-0" id="content">
-                    <div class="preview text-center p-2">
-                        <p class="display-4">
-                            Click at dialog for start chating
-                        </p>
-                    </div>
-
-                    <div class="col-lg-12 mt-4 d-none" id="messages-content">
-                        <div class="col-lg-12 d-flex flex-row">
-                            <div class="col-lg-1">
-                                <img src="/public/img/default-avatar.png" class="w-100" alt="">
-                            </div>
-                            <div class="col-lg-11 text-left">
-                                <p class="username">John Doe</p>
-                                <p class="message">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, dicta.
-                                </p>
-                            </div>
+                    <div class="col-lg-12">
+                        <div class="preview text-center p-2">
+                            <p class="display-4">
+                                Click at dialog for start chating
+                            </p>
                         </div>
-                        <div class="col-lg-12 d-flex flex-row-reverse">
-                            <div class="col-lg-1 text-right">
-                                <img src="/public/img/default-avatar.png" class="w-100" alt="">
-                            </div>
-                            <div class="col-lg-11 text-right">
-                                <p class="username">John Doe</p>
-                                <p class="message">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, dicta.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Message form -->
-                    <div class="col-lg-12 bg-light p-1" id="message-form">
-                        <form action="/" method="post">
-                            <div class="form-group">
-                                <textarea name="message" class="form-control" id="message" cols="30" rows="2"></textarea>
-                            </div>
-                            <div class="form-group mb-0">
-                                <button class="btn btn-outline-danger btn-block text-uppercase ">
-                                    <small>
-                                        Send
-                                    </small>
-                                </button>
-                            </div>
-                        </form>
+                        <!-- Message form -->
+                        <div class="col-lg-12 bg-light p-1" id="message-form">
+                            <form action="/" method="post">
+                                <div class="form-group">
+                                    <textarea name="message" class="form-control" id="message" cols="30" rows="2"></textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-outline-danger btn-block text-uppercase ">
+                                        <small>
+                                            Send
+                                        </small>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 
                 </div>
